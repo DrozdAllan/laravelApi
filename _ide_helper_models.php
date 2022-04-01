@@ -12,46 +12,43 @@
 
 namespace App\Models{
 /**
- * App\Models\EnTranslation
- *
- * @property-read \App\Models\Movie|null $movie
- * @method static \Illuminate\Database\Eloquent\Builder|EnTranslation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|EnTranslation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|EnTranslation query()
- */
-	class EnTranslation extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\FrTranslation
- *
- * @property-read \App\Models\Movie|null $movie
- * @method static \Illuminate\Database\Eloquent\Builder|FrTranslation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|FrTranslation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|FrTranslation query()
- */
-	class FrTranslation extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
- * App\Models\ItTranslation
- *
- * @method static \Illuminate\Database\Eloquent\Builder|ItTranslation newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ItTranslation newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder|ItTranslation query()
- */
-	class ItTranslation extends \Eloquent {}
-}
-
-namespace App\Models{
-/**
  * App\Models\Movie
  *
+ * @property int $id
+ * @property string $original_title
+ * @property string $slug
+ * @property string $synopsis
+ * @property string $release_date
+ * @property string $en_translation
+ * @property string|null $fr_translation
+ * @property string|null $de_translation
+ * @property string|null $es_translation
+ * @property string|null $it_translation
+ * @property string|null $ja_translation
+ * @property string|null $zh_translation
+ * @property string|null $ru_translation
+ * @property string|null $poster
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Movie newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Movie newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Movie query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereDeTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereEnTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereEsTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereFrTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereItTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereJaTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereOriginalTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie wherePoster($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereReleaseDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereRuTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereSynopsis($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereZhTranslation($value)
  */
 	class Movie extends \Eloquent {}
 }

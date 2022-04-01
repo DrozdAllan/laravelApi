@@ -9,6 +9,7 @@ class Movie extends Model
 {
     use HasFactory;
 
-    // TODO: mass assignment or not ?
-//    protected $fillable = ['']
+    //    protected $fillable = ['original_title', 'synopsis', 'release_date', 'poster'];
+    //    or
+    protected $guarded = [];
 }

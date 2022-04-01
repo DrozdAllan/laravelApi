@@ -13,7 +13,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+//Route::apiResource('movies', \App\Http\Controllers\MovieController::class)->middleware('auth:sanctum');
+//Route::apiResource('movies', \App\Http\Controllers\MovieController::class)->middleware('ability:translate');
+Route::get('/movies', [\App\Http\Controllers\MovieController::class, 'index'])->middleware('ability:translate');
+//Route::apiResource('movies', \App\Http\Controllers\MovieController::class);
+
+
+//['auth:sanctum',
+Route::post('/tokens/create', function (Request $request) {
+    $token = $request->user()->createToken("client_token", ['translate']);
+    return ['token' => $token->plainTextToken];
 });
-Route::apiResource('movies', \App\Http\Controllers\MovieController::class);
