@@ -1,0 +1,31 @@
+@use "../../node_modules/quasar/src/css/index" with (
+// Pour appliquer une font globalement
+// Tu pourras utiliser les variations de la font avec font-weight- si c'est une variable font
+$typography-font-family : 'Exo2',
+$body-font-size : 16px,
+$primary : #00796B,
+$secondary: #26A69A,
+$accent: #9C27B0,
+
+$dark: #1D1D1D,
+
+$positive: #21BA45,
+$negative: #C10015,
+$info: #31CCEC,
+$warning: #F2C037);
+
+@font-face {
+        font-family: Exo2;
+        src: url(./fonts/Exo2-VariableFont_wght.ttf);
+}
+
+// Créer des classes pour spécifier une font
+// Tu peux spécifier la weight si la font est variable
+.exo2-light {
+        font-family: 'Exo 2', sans-serif;
+        font-weight: 300;
+}
+.exo2-semibold {
+        font-family: 'Exo 2', sans-serif;
+        font-weight: 600;
+}
