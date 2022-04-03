@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,18 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/user', ['App\Http\Controllers\UserController', 'getUser'])->middleware('auth:sanctum');
-//Route::apiResource('movies', \App\Http\Controllers\MovieController::class)->middleware('auth:sanctum');
-//Route::apiResource('movies', \App\Http\Controllers\MovieController::class)->middleware('ability:translate');
-Route::get('/movies', [\App\Http\Controllers\MovieController::class, 'index'])->middleware('ability:translate');
-//Route::apiResource('movies', \App\Http\Controllers\MovieController::class);
+Route::apiResource('movies', \App\Http\Controllers\MovieController::class)->only(['index', 'show']);
+Route::apiResource('movies', \App\Http\Controllers\MovieController::class)->except(['index', 'show'])->middleware('auth:sanctum');
 
-//['auth:sanctum',
+
 Route::post('/tokens/create', function (Request $request) {
-    $token = $request->user()->createToken("client_token", ['translate']);
-    return ['token' => $token->plainTextToken];
-});
-
-Route::post('/tokens/test', function (Request $request) {
-    //    $token = $request['token'];
-    return new JsonResponse($request->user()->tokenCan('translate-movie'));
+    return $request->user()->createToken("client_token")->plainTextToken;
 });

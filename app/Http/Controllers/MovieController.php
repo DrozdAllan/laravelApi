@@ -16,13 +16,6 @@ class MovieController extends Controller
      */
     public function index(Request $request)
     {
-        dump('coucou');
-        $userTokens = $request->user()->tokens;
-
-        foreach ($userTokens as $token) {
-            dump($token);
-        }
-        dd($request->user());
         $movies = Movie::all();
         //        $movies = Movie::orderBy('title')->take(3)->get();
         return new Response($movies->toJson());
@@ -36,19 +29,14 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO: Create CONTRIBUTOR rights to create a movie (à voir comment tu vas gérer les images) https://laravel.com/docs/9.x/authorization#creating-policies
         // $request = json with 'original_title', 'synopsis' & 'release_date', 'en_title' AND 'fr_title' AND OR 'es_title' AND OR 'it_title'...
-        if (Movie::create(['original_title' => $request['original_title'],
-                           'slug' => Str::slug($request['en_title']),
-                           'synopsis' => $request['synopsis'],
-                           'release_date' => $request['release_date'],
-                           'en_translation' => $request['en_title'],
-                           'fr_translation' => $request['fr_title'],
-                           'de_translation' => $request['de_title'],
-                           'es_translation' => $request['es_title'],
-                           'it_translation' => $request['it_title'],
-                           'ja_translation' => $request['ja_title'],
-                           'zh_translation' => $request['zh_title'],
-                           'ru_translation' => $request['ru_title']])) {
+        if (Movie::create(['original_title' => $request['original_title'], 'slug' => Str::slug($request['en_title']),
+                           'synopsis' => $request['synopsis'], 'release_date' => $request['release_date'],
+                           'en_translation' => $request['en_title'], 'fr_translation' => $request['fr_title'],
+                           'de_translation' => $request['de_title'], 'es_translation' => $request['es_title'],
+                           'it_translation' => $request['it_title'], 'ja_translation' => $request['ja_title'],
+                           'zh_translation' => $request['zh_title'], 'ru_translation' => $request['ru_title']])) {
             return new Response('', 200);
         } else {
             return new Response('', 403);
@@ -75,14 +63,12 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
+        // TODO: Create CONTRIBUTOR rights to add translation to a movie https://laravel.com/docs/9.x/authorization#creating-policies
         // $request = json with 'fr_title' AND OR 'es_title' AND OR 'it_title'...
         // $movie = movies.id
-        if ($movie->update(['fr_translation' => $request['fr_title'],
-                            'de_translation' => $request['de_title'],
-                            'es_translation' => $request['es_title'],
-                            'it_translation' => $request['it_title'],
-                            'ja_translation' => $request['ja_title'],
-                            'zh_translation' => $request['zh_title'],
+        if ($movie->update(['fr_translation' => $request['fr_title'], 'de_translation' => $request['de_title'],
+                            'es_translation' => $request['es_title'], 'it_translation' => $request['it_title'],
+                            'ja_translation' => $request['ja_title'], 'zh_translation' => $request['zh_title'],
                             'ru_translation' => $request['ru_title']])) {
             return new Response('', 200);
         } else {
@@ -98,6 +84,6 @@ class MovieController extends Controller
      */
     public function destroy(Movie $movie)
     {
-        // TODO: need admin authorization to delete a movie
+        // TODO: Create ADMIN rights to delete a movie https://laravel.com/docs/9.x/authorization#creating-policies
     }
 }
