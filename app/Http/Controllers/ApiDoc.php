@@ -20,7 +20,6 @@ namespace App\Http\Controllers;
  *         url="https://www.apache.org/licenses/LICENSE-2.0.html"
  *     )
  * )
- *
  *  * @OA\Tag(
  *     name="Movies",
  *     description="Anything you can do with movies",
@@ -36,5 +35,6 @@ namespace App\Http\Controllers;
  */
 class ApiDoc
 {
+    //TODO: https://www.jetbrains.com/help/phpstorm/openapi.html#remote-spec
     //TODO: verify the accent formatting in the api doc like for Lat den ratte komma in
 }
