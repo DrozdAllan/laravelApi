@@ -18,7 +18,7 @@ class MovieController extends Controller
     {
         $movies = Movie::all();
         //        $movies = Movie::orderBy('title')->take(3)->get();
-        return new Response($movies->toJson());
+        return new Response($movies->toJson(JSON_PRETTY_PRINT));
     }
 
     /**
