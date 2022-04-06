@@ -19633,6 +19633,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_QTabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/QTabs */ "./resources/js/components/QTabs.vue");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/user */ "./resources/js/store/user.js");
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
+
 
 
 
@@ -19644,11 +19646,18 @@ __webpack_require__.r(__webpack_exports__);
     (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
       userStore.getUser();
     });
+
+    function pushToDoc() {
+      _router__WEBPACK_IMPORTED_MODULE_3__["default"].push('/api/documentation');
+    }
+
     var __returned__ = {
       userStore: userStore,
+      pushToDoc: pushToDoc,
       QTabs: _components_QTabs__WEBPACK_IMPORTED_MODULE_0__["default"],
       onMounted: vue__WEBPACK_IMPORTED_MODULE_1__.onMounted,
-      useUserStore: _store_user__WEBPACK_IMPORTED_MODULE_2__.useUserStore
+      useUserStore: _store_user__WEBPACK_IMPORTED_MODULE_2__.useUserStore,
+      router: _router__WEBPACK_IMPORTED_MODULE_3__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -19714,8 +19723,17 @@ var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Movie Titles Api : Get movie titles in 10 different languages ");
 
+var _hoisted_3 = {
+  href: "/api/documentation",
+  target: "new",
+  style: {
+    "text-decoration": "none"
+  }
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_q_avatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-avatar");
+
+  var _component_q_btn = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-btn");
 
   var _component_q_toolbar_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-toolbar-title");
 
@@ -19752,7 +19770,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     _: 1
                     /* STABLE */
 
-                  }), _hoisted_2];
+                  }), _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+                    color: "white",
+                    glossy: "",
+                    label: "DOCUMENTATION",
+                    "text-color": "primary"
+                  })])];
                 }),
                 _: 1
                 /* STABLE */
@@ -19769,7 +19792,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_page_container, null, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)];
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view, {
+            "class": "q-pa-md text-center"
+          })];
         }),
         _: 1
         /* STABLE */
@@ -19807,15 +19832,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_route_tab, {
         label: "Home",
         to: "/home"
-      }), $setup.userStore.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_q_route_tab, {
-        key: 0,
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_route_tab, {
         label: "Account",
         to: "/account"
-      })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_q_route_tab, {
-        key: 1,
-        label: "Login",
-        to: "/login"
-      })), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_route_tab, {
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_route_tab, {
         label: "About",
         to: "/about"
       })];
@@ -19899,12 +19919,6 @@ var routes = [{
     return __webpack_require__.e(/*! import() */ "resources_js_views_HomeView_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/HomeView.vue */ "./resources/js/views/HomeView.vue"));
   },
   name: "home"
-}, {
-  path: "/login",
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ "resources_js_views_LoginView_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/LoginView.vue */ "./resources/js/views/LoginView.vue"));
-  },
-  name: "login"
 }, {
   path: "/account",
   name: "account",
@@ -44220,7 +44234,7 @@ function del(target, key) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_HomeView_vue":1,"resources_js_views_LoginView_vue":1,"resources_js_views_AccountView_vue":1,"resources_js_views_AboutView_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_HomeView_vue":1,"resources_js_views_AccountView_vue":1,"resources_js_views_AboutView_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

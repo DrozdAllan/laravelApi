@@ -21,7 +21,21 @@
                 "summary": "Get one random movie",
                 "responses": {
                     "200": {
-                        "description": "One random movie"
+                        "description": "One random movie",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Result json",
+                                        "value": {
+                                            "en_title": "Inception",
+                                            "release_date": "2017"
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -29,8 +43,8 @@
                 "tags": [
                     "Movies"
                 ],
-                "summary": "Create a new movie",
-                "description": "Required fields are en_title, synopsis and release_date. Optionnal fields are fr_title, es_title, de_title, it_title, ja_title, ru_title, zh_title",
+                "summary": "Create a new movie (Need an api token)",
+                "description": "Required fields are <b>en_title</b>, <b>synopsis</b> and <b>release_date</b>. Optionnal fields are <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b>, <b>zh_title</b>",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -68,6 +82,115 @@
                 "responses": {
                     "200": {
                         "description": "Movie created",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/movies/{movie}": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Get one movie resource",
+                "parameters": [
+                    {
+                        "name": "movie",
+                        "in": "path",
+                        "description": "Slug of the movie",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "Out Of The Furnace": {
+                                "summary": "Out Of The Furnace sluggified",
+                                "value": "out-of-the-furnace"
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "The movie resource",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Result json",
+                                        "value": {
+                                            "en_title": "Out Of The Furnace",
+                                            "release_date": "2013",
+                                            "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.",
+                                            "fr_title": "Les brasiers de la colère",
+                                            "de_title": "tkt",
+                                            "es_title": "ktktkt",
+                                            "it_title": "Les brasiers de la colère",
+                                            "ja_title": "tktktk",
+                                            "zh_title": "ktktkt",
+                                            "ru_title": "ktktktkt",
+                                            "slug": "out-of-the-furnace"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Update a movie title (Need an api token)",
+                "description": "One or multiple fields from <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b> or <b>zh_title</b>",
+                "parameters": [
+                    {
+                        "name": "movie",
+                        "in": "path",
+                        "description": "Slug of the movie",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "examples": {
+                            "Out Of The Furnace": {
+                                "summary": "Out Of The Furnace sluggified",
+                                "value": "out-of-the-furnace"
+                            }
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "fr_title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "fr_title": "Les brasiers de la colère"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Movie title updated",
                         "content": {
                             "application/json": {
                                 "schema": {}

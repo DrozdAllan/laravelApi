@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\MovieResource;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,11 +16,11 @@ class MovieController extends Controller
 
     /**
      * Display a listing of the resource.
-     * @return \Illuminate\Http\Response
+     * @return MovieResource
      */
     public function index(Request $request) {
-        $movies = Movie::inRandomOrder()->first();
-        return new Response($movies->toJson(JSON_PRETTY_PRINT));
+        return new MovieResource(Movie::inRandomOrder()
+                                      ->first());
     }
 
     /**
@@ -28,19 +29,18 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        // TODO: voir comment gérer l'upload d'image si on veut créer un film https://laravel.com/docs/9.x/authorization#creating-policies
         // $request = json with 'en_title', 'synopsis' & 'release_date' AND 'fr_title' AND OR 'es_title' AND OR 'it_title'...
-        if (Movie::create(['en_title'       => $request['en_title'],
-                           'slug'           => Str::slug($request['en_title']),
-                           'synopsis'       => $request['synopsis'],
-                           'release_date'   => $request['release_date'],
-                           'fr_title' => $request['fr_title'],
-                           'de_title' => $request['de_title'],
-                           'es_title' => $request['es_title'],
-                           'it_title' => $request['it_title'],
-                           'ja_title' => $request['ja_title'],
-                           'zh_title' => $request['zh_title'],
-                           'ru_title' => $request['ru_title']])) {
+        if (Movie::create(['en_title'     => $request['en_title'],
+                           'slug'         => Str::slug($request['en_title']),
+                           'synopsis'     => $request['synopsis'],
+                           'release_date' => $request['release_date'],
+                           'fr_title'     => $request['fr_title'],
+                           'de_title'     => $request['de_title'],
+                           'es_title'     => $request['es_title'],
+                           'it_title'     => $request['it_title'],
+                           'ja_title'     => $request['ja_title'],
+                           'zh_title'     => $request['zh_title'],
+                           'ru_title'     => $request['ru_title']])) {
             return new Response('', 200);
         } else {
             return new Response('', 403);
@@ -50,10 +50,11 @@ class MovieController extends Controller
     /**
      * Display the specified resource.
      * @param Movie $movie
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|Movie|Movie[]|null $movie
+     * @return MovieResource $movie
      */
     public function show(Movie $movie) {
-        return Movie::find($movie)->first();
+        return new MovieResource(Movie::find($movie)
+                                      ->first());
     }
 
     /**
@@ -63,20 +64,17 @@ class MovieController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Movie $movie) {
-        dd('can add translations');
-        $movie = Movie::where('slug', '=', $movie_slug)->first();
+        // $request = json with 'fr_title' OR 'es_title' AND OR 'it_title'...
 
-        // $request = json with 'fr_title' AND OR 'es_title' AND OR 'it_title'...
-        if ($movie->update(['fr_translation' => $request['fr_title'],
-                            'de_translation' => $request['de_title'],
-                            'es_translation' => $request['es_title'],
-                            'it_translation' => $request['it_title'],
-                            'ja_translation' => $request['ja_title'],
-                            'zh_translation' => $request['zh_title'],
-                            'ru_translation' => $request['ru_title']])) {
-            return new Response('', 200);
-        } else {
-            return new Response('', 403);
+        $movie = Movie::find($movie)
+                      ->first();
+
+        foreach ($request->request as $newLanguage => $newTitle) {
+            if ($movie->update([$newLanguage => $newTitle])) {
+                return new Response('', 200);
+            } else {
+                return new Response('', 403);
+            }
         }
     }
 

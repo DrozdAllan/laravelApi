@@ -1,15 +1,32 @@
 <template>
-	<q-form ref="loginForm" class="q-pa-md">
-		<q-input v-model="username" :rules="usernameRules" filled label="Username" lazy-rules="ondemand"
-		         @click="hasError = false" @keydown.enter="validateLogin" />
-		<q-input v-model="password" :rules="passwordRules" :type="isPwd ? 'password' : 'text'" filled label="Password"
-		         lazy-rules="ondemand" @click="hasError = false" @keydown.enter="validateLogin">
+	<q-form ref="loginForm"
+	        class="q-pa-md">
+		<q-input v-model="username"
+		         :rules="usernameRules"
+		         filled
+		         label="Username"
+		         lazy-rules="ondemand"
+		         @click="hasError = false"
+		         @keydown.enter="validateLogin" />
+		<q-input v-model="password"
+		         :rules="passwordRules"
+		         :type="isPwd ? 'password' : 'text'"
+		         filled
+		         label="Password"
+		         lazy-rules="ondemand"
+		         @click="hasError = false"
+		         @keydown.enter="validateLogin">
 			<template v-slot:append>
-				<q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
+				<q-icon :name="isPwd ? 'visibility_off' : 'visibility'"
+				        class="cursor-pointer"
+				        @click="isPwd = !isPwd" />
 			</template>
 		</q-input>
 		<div class="flex flex-center">
-			<q-btn :disable="hasError" color="primary" label="Login" @click="validateLogin" />
+			<q-btn :disable="hasError"
+			       color="primary"
+			       label="Login"
+			       @click="validateLogin" />
 		</div>
 	</q-form>
 </template>
@@ -36,7 +53,7 @@ async function validateLogin() {
             })
             .then((response) => {
                 userStore.getUser();
-                // location.reload();
+                location.href('/home');
             })
             .catch((e) => {
                 if (e.response.status === 422) {

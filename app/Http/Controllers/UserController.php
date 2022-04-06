@@ -13,6 +13,6 @@ class UserController extends Controller
      */
     public function getUser(Request $request)
     {
-        return new JsonResponse(['user' => $request->user(), 'userTokens' => $request->user()->tokens]);
+        return new JsonResponse(['user' => $request->user(), 'userToken' => $request->user()->tokens[0]]);
     }
 }
