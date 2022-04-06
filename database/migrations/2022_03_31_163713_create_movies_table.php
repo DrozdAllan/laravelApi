@@ -14,18 +14,17 @@ return new class extends Migration {
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
-            $table->string('original_title');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->text('synopsis');
             $table->string('release_date');
-            $table->string('en_translation');
-            $table->string('fr_translation')->nullable();
-            $table->string('de_translation')->nullable();
-            $table->string('es_translation')->nullable();
-            $table->string('it_translation')->nullable();
-            $table->string('ja_translation')->nullable();
-            $table->string('zh_translation')->nullable();
-            $table->string('ru_translation')->nullable();
+            $table->string('en_title')->unique();
+            $table->string('fr_title')->nullable();
+            $table->string('de_title')->nullable();
+            $table->string('es_title')->nullable();
+            $table->string('it_title')->nullable();
+            $table->string('ja_title')->nullable();
+            $table->string('zh_title')->nullable();
+            $table->string('ru_title')->nullable();
             $table->string('poster')->nullable();
             $table->timestamps();
         });

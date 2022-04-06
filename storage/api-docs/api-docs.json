@@ -3,9 +3,6 @@
     "info": {
         "title": "L5 OpenApi",
         "description": "L5 Swagger OpenApi description",
-        "contact": {
-            "email": "darius@matulionis.lt"
-        },
         "license": {
             "name": "Apache 2.0",
             "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
@@ -21,20 +18,68 @@
                 "tags": [
                     "Movies"
                 ],
-                "description": "Get all movies",
-                "parameters": [
-                    {
-                        "name": "number",
-                        "in": "query",
-                        "description": "movies to retrieve (min: 1, max: 5)",
-                        "required": true
-                    }
-                ],
+                "summary": "Get one random movie",
                 "responses": {
                     "200": {
-                        "description": "Movies collection"
+                        "description": "One random movie"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Create a new movie",
+                "description": "Required fields are en_title, synopsis and release_date. Optionnal fields are fr_title, es_title, de_title, it_title, ja_title, ru_title, zh_title",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "en_title",
+                                    "synopsis",
+                                    "release_date"
+                                ],
+                                "properties": {
+                                    "en_title": {
+                                        "type": "string"
+                                    },
+                                    "synopsis": {
+                                        "type": "string"
+                                    },
+                                    "release_date": {
+                                        "type": "string"
+                                    },
+                                    "fr_title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "en_title": "Out Of The Furnace",
+                                "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.",
+                                "release_date": "2013",
+                                "fr_title": "Les brasiers de la colère"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Movie created",
+                        "content": {
+                            "application/json": {
+                                "schema": {}
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         }
     },
@@ -43,5 +88,15 @@
             "name": "Movies",
             "description": "Anything you can do with movies"
         }
-    ]
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter your apiKey like : Bearer 1|o8vzgdAQu0QUjGGbflR5G4x8snri0ZhylLqEfuju",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
 }

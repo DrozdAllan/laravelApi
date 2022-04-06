@@ -23,8 +23,8 @@ class MoviePolicy
 
     /**
      * Determine whether the user can view any models.
-     * @param \App\Models\User $user
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @param User|null $user
+     * @return bool
      */
     public function viewAny(?User $user) {
         return true;
@@ -32,11 +32,11 @@ class MoviePolicy
 
     /**
      * Determine whether the user can view the model.
-     * @param \App\Models\User $user
+     * @param User|null $user
      * @param \App\Models\Movie $movie
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return bool
      */
-    public function view(User $user, Movie $movie) {
+    public function view(?User $user, Movie $movie) {
         return true;
     }
 
@@ -55,7 +55,6 @@ class MoviePolicy
      * @return bool
      */
     public function update(User $user) {
-        //        return $user->id === $movie->author_id;
         return $user->rights === 'CONTRIBUTOR';
     }
 
@@ -63,7 +62,7 @@ class MoviePolicy
      * Determine whether the user can delete the model.
      * @param \App\Models\User $user
      * @param \App\Models\Movie $movie
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return bool
      */
     public function delete(User $user, Movie $movie) {
         return false;
@@ -73,7 +72,7 @@ class MoviePolicy
      * Determine whether the user can restore the model.
      * @param \App\Models\User $user
      * @param \App\Models\Movie $movie
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return bool
      */
     public function restore(User $user, Movie $movie) {
         return false;
@@ -83,7 +82,7 @@ class MoviePolicy
      * Determine whether the user can permanently delete the model.
      * @param \App\Models\User $user
      * @param \App\Models\Movie $movie
-     * @return \Illuminate\Auth\Access\Response|bool
+     * @return bool
      */
     public function forceDelete(User $user, Movie $movie) {
         return false;

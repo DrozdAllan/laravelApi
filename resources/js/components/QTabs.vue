@@ -1,5 +1,5 @@
 <template>
-	<q-tabs align="left">
+	<q-tabs>
 		<q-route-tab label="Home" to="/home" />
 		
 		<q-route-tab v-if="userStore.user" label="Account" to="/account" />

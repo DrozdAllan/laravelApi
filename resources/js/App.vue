@@ -1,18 +1,21 @@
 <template>
 	<q-layout view="hHh lpR fFf">
 		<q-header bordered class="bg-primary text-white" height-hint="98">
-			<q-toolbar>
+			<q-toolbar class="text-center">
 				<q-toolbar-title>
 					<q-avatar>
+						<!--						TODO: change avatar-->
 						<img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
 					</q-avatar>
-					Movie Titles Api
+					Movie Titles Api : Get movie titles in 10 different languages <a href="/api/documentation" target="new" style="text-decoration: none">
+					<q-btn color="white" glossy label="DOCUMENTATION" text-color="primary" />
+				</a>
 				</q-toolbar-title>
 			</q-toolbar>
 			<QTabs />
 		</q-header>
 		<q-page-container>
-			<router-view />
+			<router-view class="q-pa-md text-center" />
 		</q-page-container>
 	</q-layout>
 </template>
@@ -20,10 +23,15 @@
 import QTabs from './components/QTabs'
 import {onMounted} from 'vue'
 import {useUserStore} from "./store/user";
+import router from "./router";
 
 const userStore = useUserStore();
 onMounted(() => {
     userStore.getUser();
 })
+
+function pushToDoc() {
+    router.push('/api/documentation');
+}
 </script>
 <style></style>

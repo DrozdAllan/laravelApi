@@ -1,17 +1,19 @@
 <template>
-	Manage your tokens :
-	<div v-for="token in userStore.user.userTokens">
-		{{ token.created_at }} abilities :
-		<div v-for="ability in token.abilities">
-			{{ ability }}
+	<q-page>
+		Manage your tokens :
+		<div v-for="token in userStore.user.userTokens">
+			{{ token.created_at }} abilities :
+			<div v-for="ability in token.abilities">
+				{{ ability }}
+			</div>
 		</div>
-	</div>
-	Create new api token :
-	<q-btn label="get new token" @click="createToken"></q-btn>
-	{{ newToken }} <br>
-	<p>test your token
-		<q-btn label="test token" @click="testToken"></q-btn>
-	</p>
+		Create new api token :
+		<q-btn label="get new token" @click="createToken"></q-btn>
+		{{ newToken }} <br>
+		<p>test your token
+			<q-btn label="test token" @click="testToken"></q-btn>
+		</p>
+	</q-page>
 </template>
 <script setup>
 import {ref} from 'vue';
