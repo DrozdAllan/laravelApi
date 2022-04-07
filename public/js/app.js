@@ -19928,12 +19928,14 @@ var useUserStore = (0,pinia__WEBPACK_IMPORTED_MODULE_0__.defineStore)('user', {
   },
   actions: {
     loginUser: function loginUser(username, password) {
+      var _this = this;
+
       axios.get("/sanctum/csrf-cookie").then(function () {
         axios.post('/login', {
           name: username,
           password: password
         }).then(function (response) {
-          location.reload();
+          _this.getUser();
         })["catch"](function (e) {
           if (e.response.status === 422) {
             password.value = null;
@@ -19943,10 +19945,10 @@ var useUserStore = (0,pinia__WEBPACK_IMPORTED_MODULE_0__.defineStore)('user', {
       });
     },
     getUser: function getUser() {
-      var _this = this;
+      var _this2 = this;
 
       axios.get("/api/user").then(function (Response) {
-        _this.user = Response.data;
+        _this2.user = Response.data;
       })["catch"](function (e) {
         if (e.response.status === 401) {
           console.log('unauthorized');

@@ -14,7 +14,7 @@ export const useUserStore = defineStore('user', {
                              name: username, password: password
                          })
                          .then((response) => {
-                             location.reload();
+                             this.getUser();
                          })
                          .catch((e) => {
                              if (e.response.status === 422) {
