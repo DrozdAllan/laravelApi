@@ -17,17 +17,6 @@
 </template>
 <script setup>
 import QTabs from './components/QTabs'
-import {onMounted} from 'vue'
-import {useUserStore} from "./store/user";
-import router from "./router";
 
-const userStore = useUserStore();
-onMounted(() => {
-    userStore.getUser();
-})
-
-function pushToDoc() {
-    router.push('/api/documentation');
-}
 </script>
 <style></style>

@@ -77,7 +77,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     name: username.value,
                     password: password.value
                   }).then(function (response) {
-                    location.reload();
+                    userStore.getUser();
                   })["catch"](function (e) {
                     if (e.response.status === 422) {
                       password.value = null;
@@ -355,10 +355,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_LoginForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/LoginForm */ "./resources/js/components/LoginForm.vue");
-/* harmony import */ var _components_RegisterForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/RegisterForm */ "./resources/js/components/RegisterForm.vue");
-/* harmony import */ var _components_TokenSettings__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/TokenSettings */ "./resources/js/components/TokenSettings.vue");
-/* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store/user */ "./resources/js/store/user.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _components_LoginForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/LoginForm */ "./resources/js/components/LoginForm.vue");
+/* harmony import */ var _components_RegisterForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/RegisterForm */ "./resources/js/components/RegisterForm.vue");
+/* harmony import */ var _components_TokenSettings__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/TokenSettings */ "./resources/js/components/TokenSettings.vue");
+/* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../store/user */ "./resources/js/store/user.js");
+
 
 
 
@@ -367,13 +369,17 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var userStore = (0,_store_user__WEBPACK_IMPORTED_MODULE_3__.useUserStore)();
+    var userStore = (0,_store_user__WEBPACK_IMPORTED_MODULE_4__.useUserStore)();
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      userStore.getUser();
+    });
     var __returned__ = {
       userStore: userStore,
-      LoginForm: _components_LoginForm__WEBPACK_IMPORTED_MODULE_0__["default"],
-      RegisterForm: _components_RegisterForm__WEBPACK_IMPORTED_MODULE_1__["default"],
-      TokenSettings: _components_TokenSettings__WEBPACK_IMPORTED_MODULE_2__["default"],
-      useUserStore: _store_user__WEBPACK_IMPORTED_MODULE_3__.useUserStore
+      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      LoginForm: _components_LoginForm__WEBPACK_IMPORTED_MODULE_1__["default"],
+      RegisterForm: _components_RegisterForm__WEBPACK_IMPORTED_MODULE_2__["default"],
+      TokenSettings: _components_TokenSettings__WEBPACK_IMPORTED_MODULE_3__["default"],
+      useUserStore: _store_user__WEBPACK_IMPORTED_MODULE_4__.useUserStore
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,

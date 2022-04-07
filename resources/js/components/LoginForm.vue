@@ -52,7 +52,7 @@ async function validateLogin() {
                 name: username.value, password: password.value
             })
             .then((response) => {
-                location.reload();
+                userStore.getUser();
             })
             .catch((e) => {
                 if (e.response.status === 422) {

@@ -1,6 +1,6 @@
 <template>
 	<q-page v-if="userStore.user">
-	<TokenSettings />
+		<TokenSettings />
 	</q-page>
 	<q-page v-else>
 		<div class="row justify-center q-col-gutter-md">
@@ -14,6 +14,7 @@
 	</q-page>
 </template>
 <script setup>
+import {onMounted} from "vue";
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
 import TokenSettings from '../components/TokenSettings';
@@ -21,7 +22,7 @@ import {useUserStore} from "../store/user";
 
 const userStore = useUserStore();
 
-
-
-
+onMounted(() => {
+    userStore.getUser();
+})
 </script>

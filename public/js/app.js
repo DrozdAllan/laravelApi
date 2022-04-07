@@ -19631,33 +19631,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _components_QTabs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/QTabs */ "./resources/js/components/QTabs.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/user */ "./resources/js/store/user.js");
-/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./router */ "./resources/js/router/index.js");
-
-
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    var userStore = (0,_store_user__WEBPACK_IMPORTED_MODULE_2__.useUserStore)();
-    (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
-      userStore.getUser();
-    });
-
-    function pushToDoc() {
-      _router__WEBPACK_IMPORTED_MODULE_3__["default"].push('/api/documentation');
-    }
-
     var __returned__ = {
-      userStore: userStore,
-      pushToDoc: pushToDoc,
-      QTabs: _components_QTabs__WEBPACK_IMPORTED_MODULE_0__["default"],
-      onMounted: vue__WEBPACK_IMPORTED_MODULE_1__.onMounted,
-      useUserStore: _store_user__WEBPACK_IMPORTED_MODULE_2__.useUserStore,
-      router: _router__WEBPACK_IMPORTED_MODULE_3__["default"]
+      QTabs: _components_QTabs__WEBPACK_IMPORTED_MODULE_0__["default"]
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
