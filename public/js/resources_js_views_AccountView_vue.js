@@ -77,7 +77,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     name: username.value,
                     password: password.value
                   }).then(function (response) {
-                    userStore.getUser(); // window.location.href('/home');
+                    location.reload();
                   })["catch"](function (e) {
                     if (e.response.status === 422) {
                       password.value = null;

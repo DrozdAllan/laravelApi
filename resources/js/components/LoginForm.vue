@@ -52,8 +52,7 @@ async function validateLogin() {
                 name: username.value, password: password.value
             })
             .then((response) => {
-                userStore.getUser();
-                // window.location.href('/home');
+                location.reload();
             })
             .catch((e) => {
                 if (e.response.status === 422) {
