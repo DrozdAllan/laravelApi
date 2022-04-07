@@ -47,22 +47,7 @@ const passwordRules = [(v) => !!v || "Required", (v) => v.length >= 6 || "Min 6 
 async function validateLogin() {
     const success = await loginForm.value.validate();
     if (success) {
-        axios.get("/sanctum/csrf-cookie")
-             .then(() => {
-                 axios
-                     .post('/login', {
-                         name: username.value, password: password.value
-                     })
-                     .then((response) => {
-                         location.reload();
-                     })
-                     .catch((e) => {
-                         if (e.response.status === 422) {
-                             password.value = null;
-                             hasError.value = true;
-                         }
-                     })
-             })
+        userStore.loginUser(username.value, password.value);
     }
 }
 </script>

@@ -73,19 +73,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 success = _context.sent;
 
                 if (success) {
-                  axios.get("/sanctum/csrf-cookie").then(function () {
-                    axios.post('/login', {
-                      name: username.value,
-                      password: password.value
-                    }).then(function (response) {
-                      location.reload();
-                    })["catch"](function (e) {
-                      if (e.response.status === 422) {
-                        password.value = null;
-                        hasError.value = true;
-                      }
-                    });
-                  });
+                  userStore.loginUser(username.value, password.value);
                 }
 
               case 4:

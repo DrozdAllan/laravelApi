@@ -6,6 +6,24 @@ export const useUserStore = defineStore('user', {
             user: null
         }
     }, actions: {
+        loginUser(username, password) {
+            axios.get("/sanctum/csrf-cookie")
+                 .then(() => {
+                     axios
+                         .post('/login', {
+                             name: username, password: password
+                         })
+                         .then((response) => {
+                             location.reload();
+                         })
+                         .catch((e) => {
+                             if (e.response.status === 422) {
+                                 password.value = null;
+                                 hasError.value = true;
+                             }
+                         })
+                 })
+        },
         getUser() {
             axios.get("/api/user")
                  .then((Response) => {
