@@ -21,6 +21,10 @@ namespace App\Http\Controllers;
  *     name="Movies",
  *     description="Anything you can do with movies",
  * )
+ * @OA\Tag (
+ *     name="User",
+ *     description="Get your user informations",
+ * )
  * @OA\Get (
  *     path="/api/movies",
  *     tags={"Movies"},
@@ -110,6 +114,14 @@ namespace App\Http\Controllers;
  *      ),
  *     @OA\Response (response="200",description="Movie title updated", @OA\JsonContent()),
  * )
+ *  @OA\Get (
+ *      path="/api/user",
+ *      tags={"User"},
+ *      summary="Get your user information (need a token api)",
+ *     description="azazaz",
+ *     security={ {"sanctum": {} } },
+ * @OA\Response (response="200",description="user and userToken object"),
+ *      ),
  */
 class ApiDoc
 {

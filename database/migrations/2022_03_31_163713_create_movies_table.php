@@ -25,7 +25,6 @@ return new class extends Migration {
             $table->string('ja_title')->nullable();
             $table->string('zh_title')->nullable();
             $table->string('ru_title')->nullable();
-            $table->string('poster')->nullable();
             $table->timestamps();
         });
     }

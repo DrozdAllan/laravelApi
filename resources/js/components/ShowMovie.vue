@@ -2,13 +2,22 @@
 	<div class="row justify-center text-h4 text-primary text-bold">
 		Search by Title
 	</div>
-	<q-input v-model="title"
-	         label="Enter a movie title"
-	         @focus="[notFound = false, showMovieResult = undefined]" />
+	<div style="display: flex;justify-content: center">
+		<q-input v-model="title"
+		         label="Enter a movie title"
+		         style="width: 300px;"
+		         @focus="notFound = false ; showMovieResult = undefined"
+		         @keydown.enter="showMovie(); movieLoading=true;" />
+	</div>
 	<div class="row justify-center q-py-md">
-		<q-btn color="primary"
+		<q-btn :loading="movieLoading"
+		       color="primary"
 		       label="Search"
-		       @click="showMovie" />
+		       @click="showMovie(); movieLoading=true;">
+			<template v-slot:loading>
+				<q-spinner-gears />
+			</template>
+		</q-btn>
 	</div>
 	<q-card v-if="notFound">
 		Error : Movie not found
@@ -36,28 +45,63 @@
 				<span v-else>No Japanese title yet</span><br />
 			</span>
 		</q-card-section>
-		<q-card-actions v-if="!allTitles"
+		<q-card-actions v-if="missingTitles.length"
 		                align="center">
 			<q-btn color="primary"
 			       label="add translations"
-			       @click="addTranslations" />
+			       @click="translateDialog = true" />
 		</q-card-actions>
 	</q-card>
+	<q-dialog v-model="translateDialog">
+		<q-card class="q-pa-md"
+		        style="width: 400px">
+			<q-card-section>
+				<div class="text-h6">Update movie title</div>
+			</q-card-section>
+			<q-card-section class="q-pt-none">
+				<q-form ref="translateForm">
+					<div class="row q-col-gutter-md">
+						<div class="col-6">
+							<q-select v-model="newLanguage"
+							          :options="missingTitles"
+							          label="Language"
+							          @focus="translateBtn = 'translate'" />
+						</div>
+						<div class="col-6">
+							<q-input v-model="newTitle"
+							         label="Title"
+							         @focus="translateBtn = 'translate'" />
+						</div>
+					</div>
+				</q-form>
+			</q-card-section>
+			<q-card-actions align="center">
+				<q-btn :label="translateBtn"
+				       color="primary"
+				       @click="validateTranslate" />
+				<q-btn v-close-popup
+				       color="primary"
+				       flat
+				       label="close"
+				       @click="translateBtn = 'translate'" />
+			</q-card-actions>
+		</q-card>
+	</q-dialog>
 </template>
 <script setup>
-import {computed, ref} from "vue";
+import {ref} from "vue";
+
 
 const title = ref('');
 const showMovieResult = ref(null);
 const notFound = ref(false);
-
-const allTitles = computed(() => {
-    if (showMovieResult.value.fr_title == null || showMovieResult.value.de_title == null || showMovieResult.value.es_title == null || showMovieResult.value.it_title == null || showMovieResult.value.ja_title == null || showMovieResult.value.zh_title == null || showMovieResult.value.ru_title == null) {
-        return false
-    } else {
-        return true
-    }
-})
+const translateDialog = ref(false);
+const missingTitles = ref([]);
+const newLanguage = ref('');
+const newTitle = ref('');
+const translateForm = ref(null);
+const translateBtn = ref('translate');
+const movieLoading = ref(false);
 
 function showMovie() {
     if (title.value) {
@@ -66,6 +110,29 @@ function showMovie() {
         axios.get('/api/movies/' + titleSlug)
              .then((Response) => {
                  showMovieResult.value = Response.data;
+                 missingTitles.value = [];
+                 if (!Response.data['fr_title']) {
+                     missingTitles.value.push('fr');
+                 }
+                 if (!Response.data['de_title']) {
+                     missingTitles.value.push('de');
+                 }
+                 if (!Response.data['es_title']) {
+                     missingTitles.value.push('es');
+                 }
+                 if (!Response.data['it_title']) {
+                     missingTitles.value.push('it');
+                 }
+                 if (!Response.data['ja_title']) {
+                     missingTitles.value.push('ja');
+                 }
+                 if (!Response.data['ru_title']) {
+                     missingTitles.value.push('ru');
+                 }
+                 if (!Response.data['zh_title']) {
+                     missingTitles.value.push('zh');
+                 }
+                 movieLoading.value = false;
              })
              .catch((e) => {
                  if (e.response.status === 404) {
@@ -75,7 +142,21 @@ function showMovie() {
     }
 }
 
-function addTranslations() {
-    console.log(showMovieResult.value.fr_title);
+async function validateTranslate() {
+    const success = await translateForm.value.validate();
+    if (success) {
+        axios.patch('/api/movies/' + showMovieResult.value.slug, {
+            [newLanguage.value + '_title']: newTitle.value
+        })
+             .then((response) => {
+                 translateBtn.value = "title added !";
+                 newTitle.value = '';
+                 newLanguage.value = '';
+                 showMovie();
+             })
+             .catch((e) => {
+                 console.log(e.response);
+             })
+    }
 }
 </script>

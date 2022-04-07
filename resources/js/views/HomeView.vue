@@ -1,10 +1,10 @@
 <template>
 	<q-page>
 		<div class="row justify-center q-col-gutter-md">
-			<div class="col-3">
+			<div class="col-5">
 				<IndexMovie />
 			</div>
-			<div class="col-3">
+			<div class="col-5">
 				<ShowMovie />
 			</div>
 		</div>

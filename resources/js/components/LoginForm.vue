@@ -53,7 +53,7 @@ async function validateLogin() {
             })
             .then((response) => {
                 userStore.getUser();
-                location.href('/home');
+                // window.location.href('/home');
             })
             .catch((e) => {
                 if (e.response.status === 422) {

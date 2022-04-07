@@ -204,12 +204,35 @@
                     }
                 ]
             }
+        },
+        "/api/user": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get your user information (need a token api)",
+                "description": "azazaz",
+                "responses": {
+                    "200": {
+                        "description": "user and userToken object"
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
         }
     },
     "tags": [
         {
             "name": "Movies",
             "description": "Anything you can do with movies"
+        },
+        {
+            "name": "User",
+            "description": "Get your user informations"
         }
     ],
     "components": {

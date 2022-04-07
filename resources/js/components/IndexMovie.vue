@@ -3,9 +3,14 @@
 		Random Movie
 	</div>
 	<div class="row justify-center q-py-md">
-		<q-btn color="primary"
+		<q-btn :loading="movieLoading"
+		       color="primary"
 		       label="Get one random movie"
-		       @click="indexMovie"></q-btn>
+		       @click="indexMovie() ; movieLoading = true;">
+			<template v-slot:loading>
+				<q-spinner-gears />
+			</template>
+		</q-btn>
 	</div>
 	<q-card v-if="indexMovieResult"
 	        class="q-pa-none">
@@ -31,49 +36,19 @@
 			</span>
 		</q-card-section>
 		<q-card-actions v-if="missingTitles.length"
-		                align="center">
-			<q-btn color="primary"
-			       label="add translations"
-			       @click="translateDialog = true" />
+		                align="center"
+		                class="text-caption">
+			search by title to add missing translations
 		</q-card-actions>
 	</q-card>
-	<q-dialog v-model="translateDialog">
-		<q-card class="q-pa-md">
-			<q-form ref="translateForm">
-				<div class="row q-col-gutter-md">
-					<div class="col-6">
-						<q-select v-model="newLanguage"
-						          :options="missingTitles"
-						          label="language" @focus="translateBtn = 'translate'" />
-					</div>
-					<div class="col-6">
-						<q-input v-model="newTitle"
-						         label="title" @focus="translateBtn = 'translate'" />
-					</div>
-				</div>
-			</q-form>
-			<q-card-actions align="center">
-				<q-btn color="primary"
-				       :label="translateBtn"
-				       @click="validateTranslate" />
-				<q-btn v-close-popup
-				       color="primary"
-				       flat
-				       label="close" @click="translateBtn = 'translate'" />
-			</q-card-actions>
-		</q-card>
-	</q-dialog>
 </template>
 <script setup>
 import {ref} from "vue";
 
 const indexMovieResult = ref(null);
-const translateDialog = ref(false);
 const missingTitles = ref([]);
-const newLanguage = ref('');
-const newTitle = ref('');
-const translateForm = ref(null);
-const translateBtn = ref('translate');
+
+const movieLoading = ref(false);
 
 
 function indexMovie() {
@@ -102,6 +77,7 @@ function indexMovie() {
              if (!Response.data['zh_title']) {
                  missingTitles.value.push('zh');
              }
+             movieLoading.value = false;
          })
          .catch((e) => {
              console.log(e)
@@ -109,23 +85,5 @@ function indexMovie() {
                  console.log('unauthorized')
              }
          })
-}
-
-async function validateTranslate() {
-    const success = await translateForm.value.validate();
-    if (success) {
-        axios.patch('/api/movies/' + indexMovieResult.value.slug, {
-            [newLanguage.value + '_title']: newTitle.value
-        })
-             .then((response) => {
-                 console.log(response);
-                 translateBtn.value = "title added !";
-                 newTitle.value = '';
-                 newLanguage.value = '';
-             })
-             .catch((e) => {
-                 console.log(e.response);
-             })
-    }
 }
 </script>

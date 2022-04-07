@@ -3,10 +3,6 @@
 		<q-header bordered class="bg-primary text-white" height-hint="98">
 			<q-toolbar class="text-center">
 				<q-toolbar-title>
-					<q-avatar>
-						<!--						TODO: change avatar-->
-						<img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
-					</q-avatar>
 					Movie Titles Api : Get movie titles in 10 different languages <a href="/api/documentation" target="new" style="text-decoration: none">
 					<q-btn color="white" glossy label="DOCUMENTATION" text-color="primary" />
 				</a>
