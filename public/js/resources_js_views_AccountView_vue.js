@@ -73,16 +73,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 success = _context.sent;
 
                 if (success) {
-                  axios.post('/login', {
-                    name: username.value,
-                    password: password.value
-                  }).then(function (response) {
-                    userStore.getUser();
-                  })["catch"](function (e) {
-                    if (e.response.status === 422) {
-                      password.value = null;
-                      hasError.value = true;
-                    }
+                  axios.get("/sanctum/csrf-cookie").then(function () {
+                    axios.post('/login', {
+                      name: username.value,
+                      password: password.value
+                    }).then(function (response) {
+                      location.reload();
+                    })["catch"](function (e) {
+                      if (e.response.status === 422) {
+                        password.value = null;
+                        hasError.value = true;
+                      }
+                    });
                   });
                 }
 
@@ -96,9 +98,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       return _validateLogin.apply(this, arguments);
     }
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_1__.onMounted)(function () {
-      axios.get("/sanctum/csrf-cookie");
-    });
     var __returned__ = {
       userStore: userStore,
       loginForm: loginForm,
@@ -109,7 +108,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       usernameRules: usernameRules,
       passwordRules: passwordRules,
       validateLogin: validateLogin,
-      onMounted: vue__WEBPACK_IMPORTED_MODULE_1__.onMounted,
       ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref,
       useUserStore: _store_user__WEBPACK_IMPORTED_MODULE_2__.useUserStore
     };

@@ -31,7 +31,7 @@
 	</q-form>
 </template>
 <script setup>
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 import {useUserStore} from '../store/user';
 
 const userStore = useUserStore();
@@ -47,23 +47,22 @@ const passwordRules = [(v) => !!v || "Required", (v) => v.length >= 6 || "Min 6 
 async function validateLogin() {
     const success = await loginForm.value.validate();
     if (success) {
-        axios
-            .post('/login', {
-                name: username.value, password: password.value
-            })
-            .then((response) => {
-                userStore.getUser();
-            })
-            .catch((e) => {
-                if (e.response.status === 422) {
-                    password.value = null;
-                    hasError.value = true;
-                }
-            })
+        axios.get("/sanctum/csrf-cookie")
+             .then(() => {
+                 axios
+                     .post('/login', {
+                         name: username.value, password: password.value
+                     })
+                     .then((response) => {
+                         location.reload();
+                     })
+                     .catch((e) => {
+                         if (e.response.status === 422) {
+                             password.value = null;
+                             hasError.value = true;
+                         }
+                     })
+             })
     }
 }
-
-onMounted(() => {
-    axios.get("/sanctum/csrf-cookie");
-})
 </script>
