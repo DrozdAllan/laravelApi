@@ -23,8 +23,7 @@ export const useUserStore = defineStore('user', {
                              }
                          })
                  })
-        },
-        getUser() {
+        }, getUser() {
             axios.get("/api/user")
                  .then((Response) => {
                      this.user = Response.data;
@@ -33,6 +32,12 @@ export const useUserStore = defineStore('user', {
                      if (e.response.status === 401) {
                          console.log('unauthorized')
                      }
+                 })
+        }, disconnectUser() {
+            axios.post('/logout')
+                 .then(() => {
+                     this.user = null;
+                     location.reload();
                  })
         }
     }

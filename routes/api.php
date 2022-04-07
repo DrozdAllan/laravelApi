@@ -12,13 +12,16 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::get('/user', ['App\Http\Controllers\UserController', 'getUser'])
-     ->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')
+     ->group(function () {
+         Route::get('/user', ['App\Http\Controllers\UserController', 'getUser']);
+         Route::get('/user/token', ['App\Http\Controllers\UserController', 'getToken']);
+         Route::post('/user/token', ['App\Http\Controllers\UserController', 'refreshToken']);
+     });
+
 Route::apiResource('movies', \App\Http\Controllers\MovieController::class)
      ->only(['index', 'show']);
 Route::apiResource('movies', \App\Http\Controllers\MovieController::class)
      ->except(['index', 'show'])
      ->middleware('auth:sanctum');
 
-Route::post('/tokens/create', ['App\Http\Controllers\TokenController', 'create'])
-     ->middleware('auth:sanctum');

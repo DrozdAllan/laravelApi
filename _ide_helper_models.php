@@ -15,40 +15,36 @@ namespace App\Models{
  * App\Models\Movie
  *
  * @property int $id
- * @property string $original_title
  * @property string $slug
  * @property string $synopsis
  * @property string $release_date
- * @property string $en_translation
- * @property string|null $fr_translation
- * @property string|null $de_translation
- * @property string|null $es_translation
- * @property string|null $it_translation
- * @property string|null $ja_translation
- * @property string|null $zh_translation
- * @property string|null $ru_translation
- * @property string|null $poster
+ * @property string $en_title
+ * @property string|null $fr_title
+ * @property string|null $de_title
+ * @property string|null $es_title
+ * @property string|null $it_title
+ * @property string|null $ja_title
+ * @property string|null $zh_title
+ * @property string|null $ru_title
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Movie newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Movie newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Movie query()
  * @method static \Illuminate\Database\Eloquent\Builder|Movie whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereDeTranslation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereEnTranslation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereEsTranslation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereFrTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereDeTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereEnTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereEsTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereFrTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Movie whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereItTranslation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereJaTranslation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereOriginalTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie wherePoster($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereItTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereJaTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Movie whereReleaseDate($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereRuTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereRuTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Movie whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Movie whereSynopsis($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Movie whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Movie whereZhTranslation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie whereZhTitle($value)
  */
 	class Movie extends \Eloquent {}
 }
@@ -64,10 +60,10 @@ namespace App\Models{
  * @property string $password
  * @property string|null $two_factor_secret
  * @property string|null $two_factor_recovery_codes
+ * @property string $rights
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string $rights
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Sanctum\PersonalAccessToken[] $tokens

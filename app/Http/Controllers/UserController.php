@@ -11,8 +11,20 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function getUser(Request $request)
-    {
-        return new JsonResponse(['user' => $request->user(), 'userToken' => $request->user()->tokens[0]]);
+    public function getUser(Request $request) {
+        return $request->user();
+    }
+
+    public function getToken(Request $request) {
+        return $request->user()->tokens;
+    }
+
+    public function refreshToken(Request $request) {
+        $request->user()
+                ->tokens()
+                ->delete();
+
+        return $request->user()
+                       ->createToken("client_token")->plainTextToken;
     }
 }

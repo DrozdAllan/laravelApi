@@ -5,19 +5,23 @@
 	<div class="row justify-center q-pa-md">
 		<q-btn color="negative"
 		       label="disconnect"
-		       @click="disconnect" />
-		<q-table :columns="columns"
-		         :rows="rows"
-		         hide-pagination
-		         row-key="name"
-		         title="Api Token">
-			<template v-slot:top-right>
-				<q-btn color="primary"
-				       label="Create/Refresh Token"
-				       no-caps
-				       @click="refreshToken" />
-			</template>
-		</q-table>
+		       @click="userStore.disconnectUser" />
+		<div v-if="userToken.length">
+			<span>
+				Name : {{ userToken[0].name }} <br />
+				Created at : {{ userToken[0].created_at }} <br />
+				Last used at : {{ userToken[0].last_used_at }} <br />
+			</span>
+			<q-btn color="primary"
+			       label="Create/Refresh Token"
+			       no-caps
+			       @click="refreshToken" />
+		</div>
+		<div v-else>
+			You don't have any token yet
+			<q-btn label="generate a token"
+			       @click="refreshToken" />
+		</div>
 	</div>
 	<q-dialog v-model="alert">
 		<q-card class="q-pa-md">
@@ -35,21 +39,17 @@
 	</q-dialog>
 </template>
 <script setup>
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import {useUserStore} from '../store/user';
 import {copyToClipboard} from "quasar";
 
+const userToken = ref('');
 const newToken = ref('');
 const alert = ref(false);
 const isCopied = ref(false);
 
 
 const userStore = useUserStore();
-
-const tokenDate = computed(() => {
-    const date = new Date(userStore.user.userToken.last_used_at);
-    return date.toLocaleString('fr-FR');
-})
 
 const copyMsg = computed(() => {
     if (isCopied.value === false) {
@@ -59,21 +59,19 @@ const copyMsg = computed(() => {
     }
 })
 
-const columns = ref([{
-    name: 'name', align: 'center', label: 'Token Name', field: row => row.name, sortable: false
-}, {
-    last_used: 'token', align: 'center', label: 'Last Used at', field: 'last_used', sortable: false
-},]);
-const rows = ref([{
-    name: userStore.user.userToken.name, last_used: tokenDate,
-}]);
+function getToken() {
+    axios.get('/api/user/token')
+         .then((response) => {
+             userToken.value = response.data;
+         })
+}
 
 function refreshToken() {
-    axios.post('/api/tokens/create')
+    axios.post('/api/user/token')
          .then((response) => {
              newToken.value = response.data
              alert.value = true;
-             userStore.getUser();
+             getToken();
          })
 }
 
@@ -84,10 +82,7 @@ function copyToken() {
         })
 }
 
-function disconnect() {
-    axios.post('/logout')
-         .then((response) => {
-             location.reload();
-         })
-}
+onMounted(() => {
+    getToken();
+})
 </script>
