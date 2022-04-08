@@ -260,6 +260,18 @@ __webpack_require__.r(__webpack_exports__);
         return "Api Token Copied !";
       }
     });
+    var tokenCreated = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      if (userToken.value.length) {
+        var date = new Date(userToken.value[0].created_at);
+        return date.toLocaleString('fr-FR');
+      }
+    });
+    var tokenLastUsed = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      if (userToken.value.length) {
+        var date = new Date(userToken.value[0].last_used_at);
+        return date.toLocaleString('fr-FR');
+      }
+    });
 
     function getToken() {
       axios.get('/api/user/token').then(function (response) {
@@ -281,7 +293,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
 
-    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount)(function () {
       getToken();
     });
     var __returned__ = {
@@ -291,11 +303,13 @@ __webpack_require__.r(__webpack_exports__);
       isCopied: isCopied,
       userStore: userStore,
       copyMsg: copyMsg,
+      tokenCreated: tokenCreated,
+      tokenLastUsed: tokenLastUsed,
       getToken: getToken,
       refreshToken: refreshToken,
       copyToken: copyToken,
       computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
-      onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
+      onBeforeMount: vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeMount,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
       useUserStore: _store_user__WEBPACK_IMPORTED_MODULE_1__.useUserStore,
       copyToClipboard: quasar__WEBPACK_IMPORTED_MODULE_2__.copyToClipboard
@@ -576,15 +590,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "row justify-center text-h4 text-primary text-bold"
-}, " Manage your api token ", -1
-/* HOISTED */
-);
-
+var _hoisted_1 = {
+  "class": "row justify-center text-h5"
+};
 var _hoisted_2 = {
-  "class": "row justify-center q-pa-md"
+  "class": "row justify-center q-py-md"
 };
 var _hoisted_3 = {
   key: 0
@@ -606,11 +616,15 @@ var _hoisted_7 = {
   key: 1
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" You don't have any token yet ");
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" You don't have any api token yet ");
 
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Your new apiToken is : ");
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
 
-var _hoisted_10 = {
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Your new apiToken is : ");
+
+var _hoisted_11 = {
   "class": "text-primary"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -624,25 +638,34 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _directive_close_popup = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("close-popup");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Connected as " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.userStore.user.name) + " ", 1
+  /* TEXT */
+  ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+    "class": "q-mx-md",
     color: "negative",
-    label: "disconnect",
+    label: "Disconnect",
+    "no-caps": "",
+    size: "small",
     onClick: $setup.userStore.disconnectUser
   }, null, 8
   /* PROPS */
-  , ["onClick"]), $setup.userToken.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Name : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.userToken[0].name) + " ", 1
+  , ["onClick"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [$setup.userToken.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Name : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.userToken[0].name) + " ", 1
   /* TEXT */
-  ), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Created at : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.userToken[0].created_at) + " ", 1
+  ), _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Created at : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.tokenCreated) + " ", 1
   /* TEXT */
-  ), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Last used at : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.userToken[0].last_used_at) + " ", 1
+  ), _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Last used at : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.tokenLastUsed) + " ", 1
   /* TEXT */
   ), _hoisted_6]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+    "class": "q-my-md",
     color: "primary",
     label: "Create/Refresh Token",
     "no-caps": "",
     onClick: $setup.refreshToken
-  })])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
-    label: "generate a token",
+  })])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_7, [_hoisted_8, _hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+    "class": "q-my-md",
+    color: "primary",
+    label: "Generate a token",
+    "no-caps": "",
     onClick: $setup.refreshToken
   })]))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_dialog, {
     modelValue: $setup.alert,
@@ -655,7 +678,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "q-pa-md"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.newToken), 1
+          return [_hoisted_10, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($setup.newToken), 1
           /* TEXT */
           ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_actions, {
             align: "center"

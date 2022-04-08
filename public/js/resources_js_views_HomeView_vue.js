@@ -106,6 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _store_user__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store/user */ "./resources/js/store/user.js");
 
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -115,10 +116,12 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
+    var userStore = (0,_store_user__WEBPACK_IMPORTED_MODULE_2__.useUserStore)();
     var title = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)('');
     var showMovieResult = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(null);
     var notFound = (0,vue__WEBPACK_IMPORTED_MODULE_1__.ref)(false);
@@ -132,6 +135,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
     function showMovie() {
       if (title.value) {
+        notFound.value = false;
+        movieLoading.value = true;
         var titleSlug = title.value.toLowerCase().replace(/ /g, '-');
         axios.get('/api/movies/' + titleSlug).then(function (Response) {
           showMovieResult.value = Response.data;
@@ -169,6 +174,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         })["catch"](function (e) {
           if (e.response.status === 404) {
             notFound.value = true;
+            movieLoading.value = false;
           }
         });
       }
@@ -198,7 +204,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                     newLanguage.value = '';
                     showMovie();
                   })["catch"](function (e) {
-                    console.log(e.response);
+                    if (e.response.status === 401) {
+                      translateBtn.value = 'You must be logged in';
+                    }
                   });
                 }
 
@@ -213,6 +221,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }
 
     var __returned__ = {
+      userStore: userStore,
       title: title,
       showMovieResult: showMovieResult,
       notFound: notFound,
@@ -225,7 +234,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       movieLoading: movieLoading,
       showMovie: showMovie,
       validateTranslate: validateTranslate,
-      ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref
+      ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref,
+      useUserStore: _store_user__WEBPACK_IMPORTED_MODULE_2__.useUserStore
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -662,19 +672,24 @@ var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_38 = {
+  key: 1,
+  "class": "text-caption"
+};
+
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "text-h6"
 }, "Update movie title", -1
 /* HOISTED */
 );
 
-var _hoisted_39 = {
+var _hoisted_40 = {
   "class": "row q-col-gutter-md"
 };
-var _hoisted_40 = {
+var _hoisted_41 = {
   "class": "col-6"
 };
-var _hoisted_41 = {
+var _hoisted_42 = {
   "class": "col-6"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -711,20 +726,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       $setup.notFound = false;
       $setup.showMovieResult = undefined;
     }),
-    onKeydown: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
-      $setup.showMovie();
-      $setup.movieLoading = true;
-    }, ["enter"]))
+    onKeydown: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)($setup.showMovie, ["enter"])
   }, null, 8
   /* PROPS */
-  , ["modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+  , ["modelValue", "onKeydown"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
     loading: $setup.movieLoading,
     color: "primary",
     label: "Search",
-    onClick: _cache[3] || (_cache[3] = function ($event) {
-      $setup.showMovie();
-      $setup.movieLoading = true;
-    })
+    onClick: $setup.showMovie
   }, {
     loading: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_spinner_gears)];
@@ -782,13 +791,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         align: "center"
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+          return [$setup.userStore.user ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_q_btn, {
+            key: 0,
             color: "primary",
             label: "add translations",
-            onClick: _cache[4] || (_cache[4] = function ($event) {
+            onClick: _cache[2] || (_cache[2] = function ($event) {
               return $setup.translateDialog = true;
             })
-          })];
+          })) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_38, " You must be logged in to add translations "))];
         }),
         _: 1
         /* STABLE */
@@ -800,7 +810,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   })) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_dialog, {
     modelValue: $setup.translateDialog,
-    "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
+    "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
       return $setup.translateDialog = $event;
     })
   }, {
@@ -814,7 +824,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
           return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_section, null, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [_hoisted_38];
+              return [_hoisted_39];
             }),
             _: 1
             /* STABLE */
@@ -827,25 +837,25 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 ref: "translateForm"
               }, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_select, {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_select, {
                     modelValue: $setup.newLanguage,
-                    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+                    "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
                       return $setup.newLanguage = $event;
                     }),
                     options: $setup.missingTitles,
                     label: "Language",
-                    onFocus: _cache[6] || (_cache[6] = function ($event) {
+                    onFocus: _cache[4] || (_cache[4] = function ($event) {
                       return $setup.translateBtn = 'translate';
                     })
                   }, null, 8
                   /* PROPS */
-                  , ["modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_41, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_input, {
+                  , ["modelValue", "options"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_42, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_input, {
                     modelValue: $setup.newTitle,
-                    "onUpdate:modelValue": _cache[7] || (_cache[7] = function ($event) {
+                    "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
                       return $setup.newTitle = $event;
                     }),
                     label: "Title",
-                    onFocus: _cache[8] || (_cache[8] = function ($event) {
+                    onFocus: _cache[6] || (_cache[6] = function ($event) {
                       return $setup.translateBtn = 'translate';
                     })
                   }, null, 8
@@ -876,7 +886,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                 color: "primary",
                 flat: "",
                 label: "close",
-                onClick: _cache[9] || (_cache[9] = function ($event) {
+                onClick: _cache[7] || (_cache[7] = function ($event) {
                   return $setup.translateBtn = 'translate';
                 })
               }, null, 512
@@ -922,10 +932,10 @@ var _hoisted_1 = {
   "class": "row justify-center q-col-gutter-md"
 };
 var _hoisted_2 = {
-  "class": "col-5"
+  "class": "col-4"
 };
 var _hoisted_3 = {
-  "class": "col-5"
+  "class": "col-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_q_page = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-page");

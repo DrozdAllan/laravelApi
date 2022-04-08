@@ -7,13 +7,13 @@
 		         label="Enter a movie title"
 		         style="width: 300px;"
 		         @focus="notFound = false ; showMovieResult = undefined"
-		         @keydown.enter="showMovie(); movieLoading=true;" />
+		         @keydown.enter="showMovie" />
 	</div>
 	<div class="row justify-center q-py-md">
 		<q-btn :loading="movieLoading"
 		       color="primary"
 		       label="Search"
-		       @click="showMovie(); movieLoading=true;">
+		       @click="showMovie">
 			<template v-slot:loading>
 				<q-spinner-gears />
 			</template>
@@ -47,9 +47,12 @@
 		</q-card-section>
 		<q-card-actions v-if="missingTitles.length"
 		                align="center">
-			<q-btn color="primary"
+			<q-btn v-if="userStore.user" color="primary"
 			       label="add translations"
 			       @click="translateDialog = true" />
+			<div v-else class="text-caption">
+				You must be logged in to add translations
+			</div>
 		</q-card-actions>
 	</q-card>
 	<q-dialog v-model="translateDialog">
@@ -90,7 +93,9 @@
 </template>
 <script setup>
 import {ref} from "vue";
+import {useUserStore} from "../store/user";
 
+const userStore = useUserStore();
 
 const title = ref('');
 const showMovieResult = ref(null);
@@ -105,6 +110,8 @@ const movieLoading = ref(false);
 
 function showMovie() {
     if (title.value) {
+        notFound.value = false;
+        movieLoading.value = true;
         const titleSlug = title.value.toLowerCase()
                                .replace(/ /g, '-');
         axios.get('/api/movies/' + titleSlug)
@@ -137,6 +144,7 @@ function showMovie() {
              .catch((e) => {
                  if (e.response.status === 404) {
                      notFound.value = true;
+                     movieLoading.value = false;
                  }
              })
     }
@@ -155,7 +163,9 @@ async function validateTranslate() {
                  showMovie();
              })
              .catch((e) => {
-                 console.log(e.response);
+                 if (e.response.status === 401) {
+                     translateBtn.value = 'You must be logged in';
+                 }
              })
     }
 }

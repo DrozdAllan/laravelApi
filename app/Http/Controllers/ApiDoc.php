@@ -31,7 +31,14 @@ namespace App\Http\Controllers;
  *     summary="Get one random movie",
  *     @OA\Response (response="200", description="One random movie",
  *          @OA\JsonContent(
- *                @OA\Examples(example="result", summary="Result json", value={"en_title": "Inception", "release_date":"2017"}),
+ *                @OA\Examples(example="result", summary="Result json", value={"en_title": "Out Of The Furnace", "release_date":"2013", "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.", "fr_title": "Les Brasiers De La Colère",
+"de_title": "Auge Um Auge",
+"es_title": "Out Of The Furnace",
+"it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+"ja_title": "ファーナス/訣別の朝",
+"zh_title": "逃出熔炉",
+"ru_title": "Из пекла",
+"slug": "out-of-the-furnace", }),
  *          )
  *      )
  * )
@@ -58,10 +65,26 @@ namespace App\Http\Controllers;
  *                      property="fr_title",
  *                      type="string"),
  *              ),
- *           example={"en_title": "Out Of The Furnace", "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.", "release_date": "2013", "fr_title":"Les brasiers de la colère"}
+ *           example={"en_title": "Out Of The Furnace", "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.", "release_date": "2013", "fr_title":"Les brasiers de la colère", "de_title": "Auge Um Auge",
+"es_title": "Out Of The Furnace",
+"it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+"ja_title": "ファーナス/訣別の朝",
+"zh_title": "逃出熔炉",
+"ru_title": "Из пекла",}
  *           ),
  *      ),
- *     @OA\Response (response="200",description="Movie created", @OA\JsonContent()),
+ *     @OA\Response (response="409",description="Movie already exists", @OA\JsonContent(
+ *     @OA\Examples(example="result", summary="Result json", value="A Movie resource already exists with this en_title"),)),
+ *     @OA\Response (response="201",description="Movie created", @OA\JsonContent(
+ *          @OA\Examples(example="result", summary="Result json", value={"en_title": "Out Of The Furnace", "slug": "out-of-the-furnace", "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.", "release_date": "2013", "fr_title":"Les brasiers de la colère", "de_title": "Auge Um Auge",
+"es_title": "Out Of The Furnace",
+"it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+"ja_title": "ファーナス/訣別の朝",
+"zh_title": "逃出熔炉",
+"ru_title": "Из пекла",
+ *     "updated_at": "2022-04-08T12:47:23.000000Z",
+"created_at": "2022-04-08T12:47:23.000000Z"}),
+ *     )),
  * )
  *  * @OA\Get (
  *     path="/api/movies/{movie}",
@@ -75,16 +98,17 @@ namespace App\Http\Controllers;
  *     @OA\Schema(type="string"),
  *     @OA\Examples(example="Out Of The Furnace", value="out-of-the-furnace", summary="Out Of The Furnace sluggified"),
  *      ),
+ *
  *     @OA\Response (response="200", description="The movie resource",
  *          @OA\JsonContent(
- *                @OA\Examples(example="result", summary="Result json", value={"en_title": "Out Of The Furnace", "release_date":"2013", "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.", "fr_title": "Les brasiers de la colère",
-"de_title": "tkt",
-"es_title": "ktktkt",
-"it_title": "Les brasiers de la colère",
-"ja_title": "tktktk",
-"zh_title": "ktktkt",
-"ru_title": "ktktktkt",
-"slug": "out-of-the-furnace", }, summary="Result json"),
+ *                @OA\Examples(example="result", summary="Result json", value={"en_title": "Out Of The Furnace", "release_date":"2013", "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.", "fr_title": "Les Brasiers De La Colère",
+"de_title": "Auge Um Auge",
+"es_title": "Out Of The Furnace",
+"it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+"ja_title": "ファーナス/訣別の朝",
+"zh_title": "逃出熔炉",
+"ru_title": "Из пекла",
+"slug": "out-of-the-furnace", }),
  *          )
  *      )
  * )
@@ -102,13 +126,10 @@ namespace App\Http\Controllers;
  *     @OA\Schema(type="string"),
  *     @OA\Examples(example="Out Of The Furnace", value="out-of-the-furnace", summary="Out Of The Furnace sluggified"),
  *      ),
+ *
  *     @OA\RequestBody (
  *          @OA\MediaType (mediaType="application/json",
- *              @OA\Schema (
- *                  @OA\Property (
- *                      property="fr_title",
- *                      type="string",),
- *              ),
+ *              @OA\Schema (),
  *           example={"fr_title":"Les brasiers de la colère"}
  *           ),
  *      ),

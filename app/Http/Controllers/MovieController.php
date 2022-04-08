@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\MovieResource;
 use App\Models\Movie;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
@@ -26,24 +27,30 @@ class MovieController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return Movie|\Illuminate\Database\Eloquent\Model|JsonResponse|Response
      */
     public function store(Request $request) {
         // $request = json with 'en_title', 'synopsis' & 'release_date' AND 'fr_title' AND OR 'es_title' AND OR 'it_title'...
-        if (Movie::create(['en_title'     => $request['en_title'],
-                           'slug'         => Str::slug($request['en_title']),
-                           'synopsis'     => $request['synopsis'],
-                           'release_date' => $request['release_date'],
-                           'fr_title'     => $request['fr_title'],
-                           'de_title'     => $request['de_title'],
-                           'es_title'     => $request['es_title'],
-                           'it_title'     => $request['it_title'],
-                           'ja_title'     => $request['ja_title'],
-                           'zh_title'     => $request['zh_title'],
-                           'ru_title'     => $request['ru_title']])) {
-            return new Response('', 200);
+
+        // check if movie already exist (by en_title)
+        if (Movie::where('en_title','=', $request['en_title'])->first()) {
+            return new JsonResponse('A Movie resource already exists with this en_title', 409);
+        }
+        $movie = Movie::create(['en_title'     => $request['en_title'],
+                                'slug'         => Str::slug($request['en_title']),
+                                'synopsis'     => $request['synopsis'],
+                                'release_date' => $request['release_date'],
+                                'fr_title'     => $request['fr_title'],
+                                'de_title'     => $request['de_title'],
+                                'es_title'     => $request['es_title'],
+                                'it_title'     => $request['it_title'],
+                                'ja_title'     => $request['ja_title'],
+                                'zh_title'     => $request['zh_title'],
+                                'ru_title'     => $request['ru_title']]);
+        if ($movie) {
+            return $movie;
         } else {
-            return new Response('', 403);
+            return new Response('error', 403);
         }
     }
 

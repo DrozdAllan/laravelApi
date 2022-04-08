@@ -29,8 +29,17 @@
                                     "result": {
                                         "summary": "Result json",
                                         "value": {
-                                            "en_title": "Inception",
-                                            "release_date": "2017"
+                                            "en_title": "Out Of The Furnace",
+                                            "release_date": "2013",
+                                            "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.",
+                                            "fr_title": "Les Brasiers De La Colère",
+                                            "de_title": "Auge Um Auge",
+                                            "es_title": "Out Of The Furnace",
+                                            "it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+                                            "ja_title": "ファーナス/訣別の朝",
+                                            "zh_title": "逃出熔炉",
+                                            "ru_title": "Из пекла",
+                                            "slug": "out-of-the-furnace"
                                         }
                                     }
                                 }
@@ -74,17 +83,57 @@
                                 "en_title": "Out Of The Furnace",
                                 "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.",
                                 "release_date": "2013",
-                                "fr_title": "Les brasiers de la colère"
+                                "fr_title": "Les brasiers de la colère",
+                                "de_title": "Auge Um Auge",
+                                "es_title": "Out Of The Furnace",
+                                "it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+                                "ja_title": "ファーナス/訣別の朝",
+                                "zh_title": "逃出熔炉",
+                                "ru_title": "Из пекла"
                             }
                         }
                     }
                 },
                 "responses": {
-                    "200": {
+                    "409": {
+                        "description": "Movie already exists",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Result json",
+                                        "value": "A Movie resource already exists with this en_title"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "201": {
                         "description": "Movie created",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Result json",
+                                        "value": {
+                                            "en_title": "Out Of The Furnace",
+                                            "slug": "out-of-the-furnace",
+                                            "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.",
+                                            "release_date": "2013",
+                                            "fr_title": "Les brasiers de la colère",
+                                            "de_title": "Auge Um Auge",
+                                            "es_title": "Out Of The Furnace",
+                                            "it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+                                            "ja_title": "ファーナス/訣別の朝",
+                                            "zh_title": "逃出熔炉",
+                                            "ru_title": "Из пекла",
+                                            "updated_at": "2022-04-08T12:47:23.000000Z",
+                                            "created_at": "2022-04-08T12:47:23.000000Z"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -132,13 +181,13 @@
                                             "en_title": "Out Of The Furnace",
                                             "release_date": "2013",
                                             "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.",
-                                            "fr_title": "Les brasiers de la colère",
-                                            "de_title": "tkt",
-                                            "es_title": "ktktkt",
-                                            "it_title": "Les brasiers de la colère",
-                                            "ja_title": "tktktk",
-                                            "zh_title": "ktktkt",
-                                            "ru_title": "ktktktkt",
+                                            "fr_title": "Les Brasiers De La Colère",
+                                            "de_title": "Auge Um Auge",
+                                            "es_title": "Out Of The Furnace",
+                                            "it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+                                            "ja_title": "ファーナス/訣別の朝",
+                                            "zh_title": "逃出熔炉",
+                                            "ru_title": "Из пекла",
                                             "slug": "out-of-the-furnace"
                                         }
                                     }
@@ -174,14 +223,7 @@
                 "requestBody": {
                     "content": {
                         "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "fr_title": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            },
+                            "schema": {},
                             "example": {
                                 "fr_title": "Les brasiers de la colère"
                             }

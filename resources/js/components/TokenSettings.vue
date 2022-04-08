@@ -1,25 +1,32 @@
 <template>
-	<div class="row justify-center text-h4 text-primary text-bold">
-		Manage your api token
-	</div>
-	<div class="row justify-center q-pa-md">
-		<q-btn color="negative"
-		       label="disconnect"
+	<div class="row justify-center text-h5">
+		Connected as {{ userStore.user.name }}
+		<q-btn class="q-mx-md"
+		       color="negative"
+		       label="Disconnect"
+		       no-caps
+		       size="small"
 		       @click="userStore.disconnectUser" />
+	</div>
+	<div class="row justify-center q-py-md">
 		<div v-if="userToken.length">
 			<span>
 				Name : {{ userToken[0].name }} <br />
-				Created at : {{ userToken[0].created_at }} <br />
-				Last used at : {{ userToken[0].last_used_at }} <br />
+				Created at : {{ tokenCreated }} <br />
+				Last used at : {{ tokenLastUsed }} <br />
 			</span>
-			<q-btn color="primary"
+			<q-btn class="q-my-md"
+			       color="primary"
 			       label="Create/Refresh Token"
 			       no-caps
 			       @click="refreshToken" />
 		</div>
 		<div v-else>
-			You don't have any token yet
-			<q-btn label="generate a token"
+			You don't have any api token yet <br />
+			<q-btn class="q-my-md"
+			       color="primary"
+			       label="Generate a token"
+			       no-caps
 			       @click="refreshToken" />
 		</div>
 	</div>
@@ -39,7 +46,7 @@
 	</q-dialog>
 </template>
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import {computed, onBeforeMount, ref} from "vue";
 import {useUserStore} from '../store/user';
 import {copyToClipboard} from "quasar";
 
@@ -56,6 +63,20 @@ const copyMsg = computed(() => {
         return "Copy Api Token";
     } else {
         return "Api Token Copied !";
+    }
+})
+
+const tokenCreated = computed(() => {
+    if (userToken.value.length) {
+        const date = new Date(userToken.value[0].created_at);
+        return date.toLocaleString('fr-FR');
+    }
+})
+
+const tokenLastUsed = computed(() => {
+    if (userToken.value.length) {
+        const date = new Date(userToken.value[0].last_used_at);
+        return date.toLocaleString('fr-FR');
     }
 })
 
@@ -82,7 +103,7 @@ function copyToken() {
         })
 }
 
-onMounted(() => {
+onBeforeMount(() => {
     getToken();
 })
 </script>
