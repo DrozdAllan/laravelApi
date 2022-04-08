@@ -46,7 +46,7 @@ namespace App\Http\Controllers;
  *      path="/api/movies",
  *      tags={"Movies"},
  *      summary="Create a new movie (Need an api token)",
- *     description="Required fields are <b>en_title</b>, <b>synopsis</b> and <b>release_date</b>. Optionnal fields are <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b>, <b>zh_title</b>",
+ *     description="<b>THIS ACTION IS FOR DOCUMENTATION ONLY, PLEASE USE IT FROM WITHIN THE APP OR YOUR OWN ONLY.</b> <br /> Required fields are <b>en_title</b>, <b>synopsis</b> and <b>release_date</b>. Optionnal fields are <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b>, <b>zh_title</b>",
  *     security={ {"sanctum": {} } },
  *     @OA\RequestBody (
  *          @OA\MediaType (mediaType="application/json",
@@ -82,8 +82,7 @@ namespace App\Http\Controllers;
 "ja_title": "ファーナス/訣別の朝",
 "zh_title": "逃出熔炉",
 "ru_title": "Из пекла",
- *     "updated_at": "2022-04-08T12:47:23.000000Z",
-"created_at": "2022-04-08T12:47:23.000000Z"}),
+ *     }),
  *     )),
  * )
  *  * @OA\Get (
@@ -116,7 +115,7 @@ namespace App\Http\Controllers;
  *      path="/api/movies/{movie}",
  *      tags={"Movies"},
  *      summary="Update a movie title (Need an api token)",
- *     description="One or multiple fields from <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b> or <b>zh_title</b>",
+ *     description="<b>THIS ACTION IS FOR DOCUMENTATION ONLY, PLEASE USE IT FROM WITHIN THE APP OR YOUR OWN ONLY.</b> <br /> One or multiple fields from <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b> or <b>zh_title</b>",
  *     security={ {"sanctum": {} } },
  *     @OA\Parameter (
  *     description="Slug of the movie",
@@ -126,20 +125,28 @@ namespace App\Http\Controllers;
  *     @OA\Schema(type="string"),
  *     @OA\Examples(example="Out Of The Furnace", value="out-of-the-furnace", summary="Out Of The Furnace sluggified"),
  *      ),
- *
  *     @OA\RequestBody (
  *          @OA\MediaType (mediaType="application/json",
  *              @OA\Schema (),
  *           example={"fr_title":"Les brasiers de la colère"}
  *           ),
  *      ),
- *     @OA\Response (response="200",description="Movie title updated", @OA\JsonContent()),
+ *     @OA\Response (response="200",description="Movie title updated",  @OA\JsonContent(
+ *                @OA\Examples(example="result", summary="Result json", value={"en_title": "Out Of The Furnace", "release_date":"2013", "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.", "fr_title": "Les Brasiers De La Colère",
+"de_title": "Auge Um Auge",
+"es_title": "Out Of The Furnace",
+"it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+"ja_title": "ファーナス/訣別の朝",
+"zh_title": "逃出熔炉",
+"ru_title": "Из пекла",
+"slug": "out-of-the-furnace", }),
+ *          )),
  * )
  *  @OA\Get (
  *      path="/api/user",
  *      tags={"User"},
- *      summary="Get your user information (need a token api)",
- *     description="azazaz",
+ *      summary="Get your user information (Need a token api)",
+ *     description="Retrieve user object",
  *     security={ {"sanctum": {} } },
  * @OA\Response (response="200",description="user and userToken object"),
  *      ),

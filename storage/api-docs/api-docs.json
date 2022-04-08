@@ -53,7 +53,7 @@
                     "Movies"
                 ],
                 "summary": "Create a new movie (Need an api token)",
-                "description": "Required fields are <b>en_title</b>, <b>synopsis</b> and <b>release_date</b>. Optionnal fields are <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b>, <b>zh_title</b>",
+                "description": "<b>THIS ACTION IS FOR DOCUMENTATION ONLY, PLEASE USE IT FROM WITHIN THE APP OR YOUR OWN ONLY.</b> <br /> Required fields are <b>en_title</b>, <b>synopsis</b> and <b>release_date</b>. Optionnal fields are <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b>, <b>zh_title</b>",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -128,9 +128,7 @@
                                             "it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
                                             "ja_title": "ファーナス/訣別の朝",
                                             "zh_title": "逃出熔炉",
-                                            "ru_title": "Из пекла",
-                                            "updated_at": "2022-04-08T12:47:23.000000Z",
-                                            "created_at": "2022-04-08T12:47:23.000000Z"
+                                            "ru_title": "Из пекла"
                                         }
                                     }
                                 }
@@ -202,7 +200,7 @@
                     "Movies"
                 ],
                 "summary": "Update a movie title (Need an api token)",
-                "description": "One or multiple fields from <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b> or <b>zh_title</b>",
+                "description": "<b>THIS ACTION IS FOR DOCUMENTATION ONLY, PLEASE USE IT FROM WITHIN THE APP OR YOUR OWN ONLY.</b> <br /> One or multiple fields from <b>fr_title</b>, <b>es_title</b>, <b>de_title</b>, <b>it_title</b>, <b>ja_title</b>, <b>ru_title</b> or <b>zh_title</b>",
                 "parameters": [
                     {
                         "name": "movie",
@@ -235,7 +233,25 @@
                         "description": "Movie title updated",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {},
+                                "examples": {
+                                    "result": {
+                                        "summary": "Result json",
+                                        "value": {
+                                            "en_title": "Out Of The Furnace",
+                                            "release_date": "2013",
+                                            "synopsis": "When Rodney Baze mysteriously disappears and law enforcement doesn't follow through fast enough, his older brother, Russell, takes matters into his own hands to find justice.",
+                                            "fr_title": "Les Brasiers De La Colère",
+                                            "de_title": "Auge Um Auge",
+                                            "es_title": "Out Of The Furnace",
+                                            "it_title": "Il Fuoco Della Vendetta - Out Of The Furnace",
+                                            "ja_title": "ファーナス/訣別の朝",
+                                            "zh_title": "逃出熔炉",
+                                            "ru_title": "Из пекла",
+                                            "slug": "out-of-the-furnace"
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -252,7 +268,7 @@
                 "tags": [
                     "User"
                 ],
-                "summary": "Get your user information (need a token api)",
+                "summary": "Get your user information (Need a token api)",
                 "description": "azazaz",
                 "responses": {
                     "200": {

@@ -27,7 +27,7 @@ class MovieController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param \Illuminate\Http\Request $request
-     * @return Movie|\Illuminate\Database\Eloquent\Model|JsonResponse|Response
+     * @return MovieResource|JsonResponse|Response
      */
     public function store(Request $request) {
         // $request = json with 'en_title', 'synopsis' & 'release_date' AND 'fr_title' AND OR 'es_title' AND OR 'it_title'...
@@ -48,7 +48,7 @@ class MovieController extends Controller
                                 'zh_title'     => $request['zh_title'],
                                 'ru_title'     => $request['ru_title']]);
         if ($movie) {
-            return $movie;
+            return new MovieResource($movie);
         } else {
             return new Response('error', 403);
         }
@@ -67,8 +67,8 @@ class MovieController extends Controller
     /**
      * Update the specified resource in storage.
      * @param \Illuminate\Http\Request $request
-     * @param String
-     * @return \Illuminate\Http\Response
+     * @param Movie                    $movie
+     * @return MovieResource|Response
      */
     public function update(Request $request, Movie $movie) {
         // $request = json with 'fr_title' OR 'es_title' AND OR 'it_title'...
@@ -78,7 +78,7 @@ class MovieController extends Controller
 
         foreach ($request->request as $newLanguage => $newTitle) {
             if ($movie->update([$newLanguage => $newTitle])) {
-                return new Response('', 200);
+                return new MovieResource($movie);
             } else {
                 return new Response('', 403);
             }
