@@ -1,15 +1,17 @@
 <template>
-	<div class="row justify-center text-h4 text-primary text-bold">
+	<div class="row justify-center text-h5">
 		Search by Title
 	</div>
-	<div style="display: flex;justify-content: center">
+	<div class="q-py-sm" style="display: flex;justify-content: center">
 		<q-input v-model="title"
 		         label="Enter a movie title"
+		         dense
+		         outlined
 		         style="width: 300px;"
 		         @focus="notFound = false ; showMovieResult = undefined"
 		         @keydown.enter="showMovie" />
 	</div>
-	<div class="row justify-center q-py-md">
+	<div class="row justify-center q-pb-sm">
 		<q-btn :loading="movieLoading"
 		       color="primary"
 		       label="Search"
@@ -58,8 +60,8 @@
 	<q-dialog v-model="translateDialog">
 		<q-card class="q-pa-md"
 		        style="width: 400px">
-			<q-card-section>
-				<div class="text-h6">Update movie title</div>
+			<q-card-section >
+				<div class="text-h6 text-center">Update movie title</div>
 			</q-card-section>
 			<q-card-section class="q-pt-none">
 				<q-form ref="translateForm">

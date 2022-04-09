@@ -19695,17 +19695,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Movie Titles Api : Get movie titles in 10 different languages ");
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Movie Titles Api ");
 
-var _hoisted_2 = {
-  href: "/api/documentation",
-  target: "new",
-  style: {
-    "text-decoration": "none"
-  }
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  var _component_q_btn = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-btn");
+  var _component_q_avatar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-avatar");
 
   var _component_q_toolbar_title = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-toolbar-title");
 
@@ -19733,14 +19726,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "text-center"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_toolbar_title, null, {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\t\t\t\tTODO: add q-avatar"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_avatar, {
+                icon: "img:images/favicon.png"
+              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_toolbar_title, null, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
-                    color: "white",
-                    glossy: "",
-                    label: "DOCUMENTATION",
-                    "text-color": "primary"
-                  })])];
+                  return [_hoisted_1];
                 }),
                 _: 1
                 /* STABLE */
@@ -19792,7 +19782,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_q_tabs = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-tabs", true);
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_q_tabs, null, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_q_tabs, {
+    dense: ""
+  }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_route_tab, {
         label: "Home",
@@ -19800,9 +19792,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_route_tab, {
         label: "Account",
         to: "/account"
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_route_tab, {
-        label: "About",
-        to: "/about"
       })];
     }),
     _: 1
@@ -19890,12 +19879,6 @@ var routes = [{
   component: function component() {
     return __webpack_require__.e(/*! import() */ "resources_js_views_AccountView_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/AccountView */ "./resources/js/views/AccountView.vue"));
   }
-}, {
-  path: "/about",
-  component: function component() {
-    return __webpack_require__.e(/*! import() */ "resources_js_views_AboutView_vue").then(__webpack_require__.bind(__webpack_require__, /*! ../views/AboutView.vue */ "./resources/js/views/AboutView.vue"));
-  },
-  name: "about"
 }, {
   path: "/:pathMatch(.*)*",
   redirect: {
@@ -44224,7 +44207,7 @@ function del(target, key) {
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_views_HomeView_vue":1,"resources_js_views_AccountView_vue":1,"resources_js_views_AboutView_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_views_HomeView_vue":1,"resources_js_views_AccountView_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

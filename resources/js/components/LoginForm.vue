@@ -1,6 +1,7 @@
 <template>
 	<q-form ref="loginForm"
 	        class="q-pa-md">
+		<div class="row justify-center text-h5 q-pb-md">Connect</div>
 		<q-input v-model="username"
 		         :rules="usernameRules"
 		         filled

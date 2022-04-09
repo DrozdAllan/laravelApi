@@ -3,11 +3,11 @@
 		<TokenSettings />
 	</q-page>
 	<q-page v-else>
-		<div class="row justify-center q-col-gutter-md">
-			<div class="col-3">
+		<div class="row justify-center q-col-gutter-none q-col-gutter-md-md">
+			<div class="col-12 col-md-3">
 				<LoginForm />
 			</div>
-			<div class="col-3">
+			<div class="col-12 col-md-3">
 				<RegisterForm />
 			</div>
 		</div>

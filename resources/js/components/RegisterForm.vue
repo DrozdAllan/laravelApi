@@ -1,5 +1,6 @@
 <template>
 	<q-form ref="registerForm" class="q-pa-md">
+		<div class="row justify-center text-h5 q-pb-md">New Account</div>
 		<q-input v-model="email" :rules="emailRules" filled label="Email" lazy-rules="ondemand" type="email"
 		         @click="hasError = false" @keydown.enter="validateRegister" />
 		<q-input v-model="username" :rules="usernameRules" filled label="Username" lazy-rules="ondemand"

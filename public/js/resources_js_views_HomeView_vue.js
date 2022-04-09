@@ -295,13 +295,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "row justify-center text-h4 text-primary text-bold"
+  "class": "row justify-center text-h5"
 }, " Random Movie ", -1
 /* HOISTED */
 );
 
 var _hoisted_2 = {
-  "class": "row justify-center q-py-md"
+  "class": "row justify-center q-py-sm"
 };
 var _hoisted_3 = {
   "class": "text-primary text-bold"
@@ -530,19 +530,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "row justify-center text-h4 text-primary text-bold"
+  "class": "row justify-center text-h5"
 }, " Search by Title ", -1
 /* HOISTED */
 );
 
 var _hoisted_2 = {
+  "class": "q-py-sm",
   style: {
     "display": "flex",
     "justify-content": "center"
   }
 };
 var _hoisted_3 = {
-  "class": "row justify-center q-py-md"
+  "class": "row justify-center q-pb-sm"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Error : Movie not found ");
@@ -678,7 +679,7 @@ var _hoisted_38 = {
 };
 
 var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "text-h6"
+  "class": "text-h6 text-center"
 }, "Update movie title", -1
 /* HOISTED */
 );
@@ -719,6 +720,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $setup.title = $event;
     }),
     label: "Enter a movie title",
+    dense: "",
+    outlined: "",
     style: {
       "width": "300px"
     },
@@ -928,21 +931,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
-  "class": "row justify-center q-col-gutter-md"
-};
+
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Movie Titles is an api developed by "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "text-primary",
+  href: "https://allandrozd.com/",
+  style: {
+    "text-decoration": "none"
+  },
+  target: "new"
+}, "Allan Drozd"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" that display movies in English, French, German, Spanish, Italian, Chinese, Russian and Japanese. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" The documentation for the api is available "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "text-primary",
+  href: "/api/documentation",
+  style: {
+    "text-decoration": "none"
+  },
+  target: "new"
+}, " here "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(". "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" To add movies and translations, you can use the account \"user1\" and the password \"password\". "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\t\tTODO: add contact mail with mailtrap to test mailer in laravel ")], -1
+/* HOISTED */
+);
+
 var _hoisted_2 = {
-  "class": "col-4"
+  "class": "row justify-center q-col-gutter-md q-pt-md"
 };
 var _hoisted_3 = {
-  "class": "col-4"
+  "class": "col-12 col-md-4"
+};
+var _hoisted_4 = {
+  "class": "col-12 col-md-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_q_separator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-separator");
+
   var _component_q_page = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-page");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_q_page, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndexMovie"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowMovie"])])])];
+      return [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_separator, {
+        inset: "",
+        spaced: ""
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowMovie"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndexMovie"])])])];
     }),
     _: 1
     /* STABLE */

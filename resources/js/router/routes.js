@@ -7,10 +7,6 @@ const routes = [{
     name: "account",
     component: () => import("../views/AccountView")
 }, {
-    path: "/about",
-    component: () => import("../views/AboutView.vue"),
-    name: "about",
-}, {
     path: "/:pathMatch(.*)*", redirect: {name: 'home'}
 },];
 export default routes;

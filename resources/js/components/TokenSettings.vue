@@ -1,16 +1,20 @@
 <template>
-	<div class="row justify-center text-h5">
+	<div class="row justify-center text-h6">
 		Connected as {{ userStore.user.name }}
-		<q-btn class="q-mx-md"
+	</div>
+	<div class="row justify-center">
+		<q-btn class="q-ma-sm"
 		       color="negative"
 		       label="Disconnect"
 		       no-caps
 		       size="small"
 		       @click="userStore.disconnectUser" />
 	</div>
-	<div class="row justify-center q-py-md">
+	<q-separator inset spaced />
+	<div class="row justify-center q-py-none">
 		<div v-if="userToken.length">
 			<span>
+				<div class="text-h5">Token Information</div>
 				Name : {{ userToken[0].name }} <br />
 				Created at : {{ tokenCreated }} <br />
 				Last used at : {{ tokenLastUsed }} <br />

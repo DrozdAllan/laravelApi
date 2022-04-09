@@ -1,8 +1,8 @@
 <template>
-	<div class="row justify-center text-h4 text-primary text-bold">
+	<div class="row justify-center text-h5">
 		Random Movie
 	</div>
-	<div class="row justify-center q-py-md">
+	<div class="row justify-center q-py-sm">
 		<q-btn :loading="movieLoading"
 		       color="primary"
 		       label="Get one random movie"
