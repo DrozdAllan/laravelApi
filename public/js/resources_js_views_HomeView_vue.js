@@ -258,17 +258,89 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _components_IndexMovie__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/IndexMovie */ "./resources/js/components/IndexMovie.vue");
-/* harmony import */ var _components_ShowMovie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/ShowMovie */ "./resources/js/components/ShowMovie.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_IndexMovie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/IndexMovie */ "./resources/js/components/IndexMovie.vue");
+/* harmony import */ var _components_ShowMovie__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/ShowMovie */ "./resources/js/components/ShowMovie.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
+    var dialog = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(false);
+    var contactForm = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(null);
+    var mail = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)('');
+    var message = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)('');
+    var emailRules = [function (v) {
+      return !!v || "Required";
+    }, function (v) {
+      return /.+@.+\..+/.test(v) || "Email must be valid";
+    }];
+
+    function contactValidate() {
+      return _contactValidate.apply(this, arguments);
+    }
+
+    function _contactValidate() {
+      _contactValidate = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var success;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return contactForm.value.validate();
+
+              case 2:
+                success = _context.sent;
+
+                if (success) {
+                  alert('valid'); // sendMsg();
+                } else {
+                  console.log('form validation failed');
+                }
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+      return _contactValidate.apply(this, arguments);
+    }
+
+    function sendMsg() {
+      axios.post('api/contact', {
+        'mail': mail.value,
+        'message': message.value
+      }).then(function (Response) {
+        console.log(Response.data);
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
+
     var __returned__ = {
-      IndexMovie: _components_IndexMovie__WEBPACK_IMPORTED_MODULE_0__["default"],
-      ShowMovie: _components_ShowMovie__WEBPACK_IMPORTED_MODULE_1__["default"]
+      dialog: dialog,
+      contactForm: contactForm,
+      mail: mail,
+      message: message,
+      emailRules: emailRules,
+      contactValidate: contactValidate,
+      sendMsg: sendMsg,
+      IndexMovie: _components_IndexMovie__WEBPACK_IMPORTED_MODULE_1__["default"],
+      ShowMovie: _components_ShowMovie__WEBPACK_IMPORTED_MODULE_2__["default"],
+      ref: vue__WEBPACK_IMPORTED_MODULE_3__.ref
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -932,44 +1004,211 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 
-var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Movie Titles is an api developed by "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  "class": "text-primary",
-  href: "https://allandrozd.com/",
-  style: {
-    "text-decoration": "none"
-  },
-  target: "new"
-}, "Allan Drozd"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" that display movies in English, French, German, Spanish, Italian, Chinese, Russian and Japanese. "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" The documentation for the api is available "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Movie Titles is an api that display movies in English, French, German, Spanish, Italian, Chinese, Russian and Japanese. ");
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" The documentation for the api is available ");
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "text-primary",
   href: "/api/documentation",
   style: {
     "text-decoration": "none"
   },
   target: "new"
-}, " here "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(". "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" To add movies and translations, you can use the account \"user1\" and the password \"password\". "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\t\tTODO: add contact mail with mailtrap to test mailer in laravel ")], -1
+}, "here", -1
 /* HOISTED */
 );
 
-var _hoisted_2 = {
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(". ");
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" To add movies and translations, you can use the account \"user1\" and the password \"password\". ");
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Developed by ");
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  "class": "text-primary",
+  href: "https://allandrozd.com/",
+  style: {
+    "text-decoration": "none"
+  },
+  target: "new"
+}, "Allan Drozd", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(". For any question ");
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(". ");
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-h6"
+}, "Contact by Mail", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = {
   "class": "row justify-center q-col-gutter-md q-pt-md"
 };
-var _hoisted_3 = {
+var _hoisted_15 = {
   "class": "col-12 col-md-4"
 };
-var _hoisted_4 = {
+var _hoisted_16 = {
   "class": "col-12 col-md-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_q_card_section = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-card-section");
+
+  var _component_q_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-input");
+
+  var _component_q_btn = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-btn");
+
+  var _component_q_card_actions = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-card-actions");
+
+  var _component_q_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-form");
+
+  var _component_q_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-card");
+
+  var _component_q_dialog = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-dialog");
+
   var _component_q_separator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-separator");
 
   var _component_q_page = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-page");
 
+  var _directive_close_popup = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDirective)("close-popup");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_q_page, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_separator, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [_hoisted_1, _hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6, _hoisted_7, _hoisted_8, _hoisted_9, _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        href: "#",
+        onClick: _cache[0] || (_cache[0] = function ($event) {
+          return $setup.dialog = true;
+        })
+      }, "contact me"), _hoisted_12]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_dialog, {
+        modelValue: $setup.dialog,
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+          return $setup.dialog = $event;
+        }),
+        persistent: ""
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card, {
+            style: {
+              "min-width": "350px"
+            }
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_section, null, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [_hoisted_13];
+                }),
+                _: 1
+                /* STABLE */
+
+              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_form, {
+                ref: "contactForm"
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_section, {
+                    "class": "q-pt-none"
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_input, {
+                        modelValue: $setup.mail,
+                        "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+                          return $setup.mail = $event;
+                        }),
+                        rule: $setup.emailRules,
+                        autofocus: "",
+                        dense: "",
+                        label: "Your mail to recontact you",
+                        "lazy-rules": "ondemand",
+                        type: "email"
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_section, {
+                    "class": "q-pt-none"
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_input, {
+                        modelValue: $setup.message,
+                        "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+                          return $setup.message = $event;
+                        }),
+                        autofocus: "",
+                        dense: "",
+                        label: "Your message",
+                        type: "textarea",
+                        onKeyup: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function ($event) {
+                          return $setup.dialog = false;
+                        }, ["enter"]))
+                      }, null, 8
+                      /* PROPS */
+                      , ["modelValue"])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_actions, {
+                    align: "right",
+                    "class": "text-primary"
+                  }, {
+                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+                        flat: "",
+                        label: "Cancel"
+                      }, null, 512
+                      /* NEED_PATCH */
+                      ), [[_directive_close_popup]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+                        flat: "",
+                        label: "Send mail",
+                        onClick: $setup.contactValidate
+                      }, null, 512
+                      /* NEED_PATCH */
+                      ), [[_directive_close_popup]])];
+                    }),
+                    _: 1
+                    /* STABLE */
+
+                  })];
+                }),
+                _: 1
+                /* STABLE */
+
+              }, 512
+              /* NEED_PATCH */
+              )];
+            }),
+            _: 1
+            /* STABLE */
+
+          })];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_separator, {
         inset: "",
         spaced: ""
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowMovie"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndexMovie"])])])];
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowMovie"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndexMovie"])])])];
     }),
     _: 1
     /* STABLE */

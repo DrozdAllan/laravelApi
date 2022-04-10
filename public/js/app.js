@@ -19726,11 +19726,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
             "class": "text-center"
           }, {
             "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("\t\t\t\tTODO: add q-avatar"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_avatar, {
-                icon: "img:images/favicon.png"
-              }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_toolbar_title, null, {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_toolbar_title, null, {
                 "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                  return [_hoisted_1];
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_avatar, {
+                    icon: "img:images/favicon.png"
+                  }), _hoisted_1];
                 }),
                 _: 1
                 /* STABLE */

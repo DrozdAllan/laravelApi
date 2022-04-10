@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')
          Route::post('/user/token', ['App\Http\Controllers\UserController', 'refreshToken']);
      });
 
+Route::post('/contact', ['App\Http\Controllers\UserController', 'sendMail']);
+
 Route::apiResource('movies', \App\Http\Controllers\MovieController::class)
      ->only(['index', 'show']);
 Route::apiResource('movies', \App\Http\Controllers\MovieController::class)
