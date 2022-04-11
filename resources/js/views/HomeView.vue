@@ -94,7 +94,7 @@ const emailRules = [(v) => !!v || "Required", (v) => /.+@.+\..+/.test(v) || "Ema
 async function contactValidate() {
     const success = await contactForm.value.validate();
     if (success) {
-        // sendMsg();
+        sendMsg();
         dialog.value = false;
         mail.value = '';
         message.value = '';
