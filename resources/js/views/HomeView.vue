@@ -10,7 +10,9 @@
 			Developed by <a class="text-primary"
 								 href="https://allandrozd.com/"
 								 style="text-decoration: none"
-								 target="new">Allan Drozd</a>. For any question <a href="#"
+								 target="new">Allan Drozd</a>. For any question <a class="text-primary"
+																									href="#"
+																									style="text-decoration: none"
 																									@click="dialog = true">contact me</a>.
 		</span>
 	 <q-dialog v-model="dialog"
@@ -22,7 +24,7 @@
 		  <q-form ref="contactForm">
 			 <q-card-section class="q-pt-none">
 				<q-input v-model="mail"
-							:rule="emailRules"
+							:rules="emailRules"
 							autofocus
 							dense
 							label="Your mail to recontact you"
@@ -37,17 +39,30 @@
 							type="textarea"
 							@keyup.enter="dialog = false" />
 			 </q-card-section>
-			 <q-card-actions align="right"
-								  class="text-primary">
-				<q-btn v-close-popup
-						 flat
-						 label="Cancel" />
-				<q-btn v-close-popup
-						 flat
-						 label="Send mail"
-						 @click="contactValidate" />
-			 </q-card-actions>
 		  </q-form>
+		  <q-card-actions align="right"
+								class="text-primary">
+			 <q-btn v-close-popup
+					  flat
+					  label="Cancel" />
+			 <q-btn flat
+					  label="Send mail"
+					  @click="contactValidate" />
+		  </q-card-actions>
+		</q-card>
+	 </q-dialog>
+	 <q-dialog v-model="seamless"
+				  position="bottom"
+				  seamless>
+		<q-card style="width: 350px">
+		  <q-card-section class="row items-center no-wrap">
+			 <div class="text-weight-bold">Message sent !</div>
+			 <q-space />
+			 <q-btn v-close-popup
+					  flat
+					  icon="close"
+					  round />
+		  </q-card-section>
 		</q-card>
 	 </q-dialog>
 	 <q-separator inset
@@ -72,29 +87,25 @@ const dialog = ref(false);
 const contactForm = ref(null);
 const mail = ref('');
 const message = ref('');
+const seamless = ref(false);
 
 const emailRules = [(v) => !!v || "Required", (v) => /.+@.+\..+/.test(v) || "Email must be valid"];
 
 async function contactValidate() {
     const success = await contactForm.value.validate();
     if (success) {
-        // TODO: fix error with validation
-        alert('valid');
         // sendMsg();
-    } else {
-        console.log('form validation failed');
+        dialog.value = false;
+        mail.value = '';
+        message.value = '';
+        seamless.value = true;
     }
 }
 
 function sendMsg() {
     axios.post('api/contact', {
         'mail': mail.value, 'message': message.value
-    })
-         .then((Response) => {
-             console.log(Response.data);
-         })
-         .catch((e) => {
-             console.log(e);
-         })
+    });
+
 }
 </script>

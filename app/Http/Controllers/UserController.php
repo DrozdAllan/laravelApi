@@ -35,5 +35,4 @@ class UserController extends Controller
         Mail::to($request->mail)
             ->send(new ContactMail($request->mail, $request->message));
     }
-    // TODO: créer un compte AWS
 }

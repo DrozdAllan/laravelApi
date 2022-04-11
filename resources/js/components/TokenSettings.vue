@@ -1,53 +1,54 @@
 <template>
-	<div class="row justify-center text-h6">
-		Connected as {{ userStore.user.name }}
-	</div>
-	<div class="row justify-center">
-		<q-btn class="q-ma-sm"
-		       color="negative"
-		       label="Disconnect"
-		       no-caps
-		       size="small"
-		       @click="userStore.disconnectUser" />
-	</div>
-	<q-separator inset spaced />
-	<div class="row justify-center q-py-none">
-		<div v-if="userToken.length">
+  <div class="row justify-center text-h6">
+	 Connected as {{ userStore.user.name }}
+  </div>
+  <div class="row justify-center">
+	 <q-btn class="q-ma-sm"
+			  color="negative"
+			  label="Disconnect"
+			  no-caps
+			  size="small"
+			  @click="userStore.disconnectUser" />
+  </div>
+  <q-separator inset
+					spaced />
+  <div class="row justify-center q-py-none">
+	 <div v-if="userToken.length">
 			<span>
-				<div class="text-h5">Token Information</div>
-				Name : {{ userToken[0].name }} <br />
+				<div class="text-h5 q-pb-md">Token Information</div>
+			  <!--				Name : {{ userToken[0].name }} <br />-->
 				Created at : {{ tokenCreated }} <br />
 				Last used at : {{ tokenLastUsed }} <br />
 			</span>
-			<q-btn class="q-my-md"
-			       color="primary"
-			       label="Create/Refresh Token"
-			       no-caps
-			       @click="refreshToken" />
-		</div>
-		<div v-else>
-			You don't have any api token yet <br />
-			<q-btn class="q-my-md"
-			       color="primary"
-			       label="Generate a token"
-			       no-caps
-			       @click="refreshToken" />
-		</div>
-	</div>
-	<q-dialog v-model="alert">
-		<q-card class="q-pa-md">
-			Your new apiToken is : <span class="text-primary"> {{ newToken }} </span>
-			<q-card-actions align="center">
-				<q-btn :label="copyMsg"
-				       color="primary"
-				       @click="copyToken" />
-				<q-btn v-close-popup
-				       color="primary"
-				       flat
-				       label="close" />
-			</q-card-actions>
-		</q-card>
-	</q-dialog>
+		<q-btn class="q-mt-md"
+				 color="primary"
+				 label="Create/Refresh Token"
+				 no-caps
+				 @click="refreshToken" />
+	 </div>
+	 <div v-else>
+		You don't have any api token yet <br />
+		<q-btn class="q-my-md"
+				 color="primary"
+				 label="Generate a token"
+				 no-caps
+				 @click="refreshToken" />
+	 </div>
+  </div>
+  <q-dialog v-model="alert">
+	 <q-card class="q-pa-md">
+		Your new apiToken is : <span class="text-primary"> {{ newToken }} </span>
+		<q-card-actions align="center">
+		  <q-btn :label="copyMsg"
+					color="primary"
+					@click="copyToken" />
+		  <q-btn v-close-popup
+					color="primary"
+					flat
+					label="close" />
+		</q-card-actions>
+	 </q-card>
+  </q-dialog>
 </template>
 <script setup>
 import {computed, onBeforeMount, ref} from "vue";

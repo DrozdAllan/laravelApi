@@ -280,6 +280,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var contactForm = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(null);
     var mail = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)('');
     var message = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)('');
+    var seamless = (0,vue__WEBPACK_IMPORTED_MODULE_3__.ref)(false);
     var emailRules = [function (v) {
       return !!v || "Required";
     }, function (v) {
@@ -304,9 +305,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 success = _context.sent;
 
                 if (success) {
-                  alert('valid'); // sendMsg();
-                } else {
-                  console.log('form validation failed');
+                  // sendMsg();
+                  dialog.value = false;
+                  mail.value = '';
+                  message.value = '';
+                  seamless.value = true;
                 }
 
               case 4:
@@ -323,10 +326,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       axios.post('api/contact', {
         'mail': mail.value,
         'message': message.value
-      }).then(function (Response) {
-        console.log(Response.data);
-      })["catch"](function (e) {
-        console.log(e);
       });
     }
 
@@ -335,6 +334,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       contactForm: contactForm,
       mail: mail,
       message: message,
+      seamless: seamless,
       emailRules: emailRules,
       contactValidate: contactValidate,
       sendMsg: sendMsg,
@@ -1058,13 +1058,19 @@ var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_14 = {
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "text-weight-bold"
+}, "Message sent !", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = {
   "class": "row justify-center q-col-gutter-md q-pt-md"
 };
-var _hoisted_15 = {
+var _hoisted_16 = {
   "class": "col-12 col-md-4"
 };
-var _hoisted_16 = {
+var _hoisted_17 = {
   "class": "col-12 col-md-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -1072,15 +1078,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   var _component_q_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-input");
 
+  var _component_q_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-form");
+
   var _component_q_btn = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-btn");
 
   var _component_q_card_actions = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-card-actions");
 
-  var _component_q_form = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-form");
-
   var _component_q_card = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-card");
 
   var _component_q_dialog = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-dialog");
+
+  var _component_q_space = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-space");
 
   var _component_q_separator = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("q-separator");
 
@@ -1091,7 +1099,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_q_page, null, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, [_hoisted_1, _hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6, _hoisted_7, _hoisted_8, _hoisted_9, _hoisted_10, _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+        "class": "text-primary",
         href: "#",
+        style: {
+          "text-decoration": "none"
+        },
         onClick: _cache[0] || (_cache[0] = function ($event) {
           return $setup.dialog = true;
         })
@@ -1129,7 +1141,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                         "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
                           return $setup.mail = $event;
                         }),
-                        rule: $setup.emailRules,
+                        rules: $setup.emailRules,
                         autofocus: "",
                         dense: "",
                         label: "Your mail to recontact you",
@@ -1165,27 +1177,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
                     _: 1
                     /* STABLE */
 
-                  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_actions, {
-                    align: "right",
-                    "class": "text-primary"
-                  }, {
-                    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-                      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
-                        flat: "",
-                        label: "Cancel"
-                      }, null, 512
-                      /* NEED_PATCH */
-                      ), [[_directive_close_popup]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
-                        flat: "",
-                        label: "Send mail",
-                        onClick: $setup.contactValidate
-                      }, null, 512
-                      /* NEED_PATCH */
-                      ), [[_directive_close_popup]])];
-                    }),
-                    _: 1
-                    /* STABLE */
-
                   })];
                 }),
                 _: 1
@@ -1193,7 +1184,68 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
               }, 512
               /* NEED_PATCH */
-              )];
+              ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_actions, {
+                align: "right",
+                "class": "text-primary"
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+                    flat: "",
+                    label: "Cancel"
+                  }, null, 512
+                  /* NEED_PATCH */
+                  ), [[_directive_close_popup]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+                    flat: "",
+                    label: "Send mail",
+                    onClick: $setup.contactValidate
+                  })];
+                }),
+                _: 1
+                /* STABLE */
+
+              })];
+            }),
+            _: 1
+            /* STABLE */
+
+          })];
+        }),
+        _: 1
+        /* STABLE */
+
+      }, 8
+      /* PROPS */
+      , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_dialog, {
+        modelValue: $setup.seamless,
+        "onUpdate:modelValue": _cache[5] || (_cache[5] = function ($event) {
+          return $setup.seamless = $event;
+        }),
+        position: "bottom",
+        seamless: ""
+      }, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card, {
+            style: {
+              "width": "350px"
+            }
+          }, {
+            "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+              return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_card_section, {
+                "class": "row items-center no-wrap"
+              }, {
+                "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+                  return [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_space), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_btn, {
+                    flat: "",
+                    icon: "close",
+                    round: ""
+                  }, null, 512
+                  /* NEED_PATCH */
+                  ), [[_directive_close_popup]])];
+                }),
+                _: 1
+                /* STABLE */
+
+              })];
             }),
             _: 1
             /* STABLE */
@@ -1208,7 +1260,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       , ["modelValue"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_q_separator, {
         inset: "",
         spaced: ""
-      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_14, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowMovie"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndexMovie"])])])];
+      }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["ShowMovie"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)($setup["IndexMovie"])])])];
     }),
     _: 1
     /* STABLE */
